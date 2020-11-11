@@ -3,3 +3,6 @@
 
 # mypy
 .mypy_cache
+
+# Python
+__pycache__/
