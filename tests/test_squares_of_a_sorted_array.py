@@ -1,6 +1,6 @@
 import pytest
 
-from src.arrays.squares_of_a_sorted_array import Solution
+from src.squares_of_a_sorted_array import Solution
 
 
 @pytest.mark.parametrize(

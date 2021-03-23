@@ -1,6 +1,6 @@
 import pytest
 
-from src.arrays.find_numbers_with_even_number_of_digits import Solution
+from src.find_numbers_with_even_number_of_digits import Solution
 
 
 @pytest.mark.parametrize(

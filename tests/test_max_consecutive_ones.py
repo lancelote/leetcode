@@ -1,4 +1,4 @@
-from src.arrays.max_consecutive_ones import Solution
+from src.max_consecutive_ones import Solution
 
 
 def test_basic_example():
