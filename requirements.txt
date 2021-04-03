@@ -4,3 +4,4 @@ flake8==3.9.0
 pur==5.4.0
 pytest==6.2.2
 mypy==0.812
+click==7.1.2
