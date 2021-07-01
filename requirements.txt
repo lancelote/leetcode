@@ -1,5 +1,5 @@
 black==19.10b0
-click==8.0.1
+click<8.0.0
 flake8==3.9.2
 mypy==0.910
 pre-commit==2.13.0
