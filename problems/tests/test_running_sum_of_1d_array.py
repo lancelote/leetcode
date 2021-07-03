@@ -1,5 +1,4 @@
 import pytest
-
 from src.running_sum_of_1d_array import Solution
 
 

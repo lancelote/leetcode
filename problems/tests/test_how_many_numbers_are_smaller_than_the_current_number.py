@@ -1,5 +1,4 @@
 import pytest
-
 from src.how_many_numbers_are_smaller_than_the_current_number import Solution
 
 

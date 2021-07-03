@@ -1,5 +1,4 @@
 import pytest
-
 from src.create_target_array_in_the_given_order import Solution
 
 

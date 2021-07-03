@@ -1,5 +1,4 @@
 import pytest
-
 from src.find_numbers_with_even_number_of_digits import Solution
 
 

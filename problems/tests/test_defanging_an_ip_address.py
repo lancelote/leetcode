@@ -1,5 +1,4 @@
 import pytest
-
 from src.defanging_an_ip_address import Solution
 
 

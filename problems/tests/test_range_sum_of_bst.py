@@ -1,5 +1,4 @@
 import pytest
-
 from src.range_sum_of_bst import create_tree
 from src.range_sum_of_bst import Solution
 

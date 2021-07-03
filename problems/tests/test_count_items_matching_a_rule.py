@@ -1,5 +1,4 @@
 import pytest
-
 from src.count_items_matching_a_rule import Solution
 
 

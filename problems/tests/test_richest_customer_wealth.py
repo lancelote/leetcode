@@ -1,5 +1,4 @@
 import pytest
-
 from src.richest_customer_wealth import Solution
 
 

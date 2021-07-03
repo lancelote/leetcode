@@ -1,5 +1,4 @@
 import pytest
-
 from src.find_center_of_star_graph import Solution
 
 

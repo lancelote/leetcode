@@ -1,5 +1,4 @@
 import pytest
-
 from src.number_of_good_pairs import Solution
 
 
