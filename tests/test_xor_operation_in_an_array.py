@@ -1,4 +1,5 @@
 import pytest
+
 from src.xor_operation_in_an_array import Solution
 
 

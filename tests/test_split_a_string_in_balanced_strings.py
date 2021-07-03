@@ -1,4 +1,5 @@
 import pytest
+
 from src.split_a_string_in_balanced_strings import Solution
 
 

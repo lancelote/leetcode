@@ -1,4 +1,5 @@
 import pytest
+
 from src.kids_with_the_greatest_number_of_candies import Solution
 
 

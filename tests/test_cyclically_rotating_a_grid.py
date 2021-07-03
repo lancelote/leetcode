@@ -1,7 +1,7 @@
 import pytest
 
-from problems.src.cyclically_rotating_a_grid import layer_coordinates
-from problems.src.cyclically_rotating_a_grid import Solution
+from src.cyclically_rotating_a_grid import layer_coordinates
+from src.cyclically_rotating_a_grid import Solution
 
 
 @pytest.mark.parametrize(

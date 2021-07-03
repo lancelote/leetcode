@@ -1,4 +1,5 @@
 import pytest
+
 from src.shuffle_strings import Solution
 
 

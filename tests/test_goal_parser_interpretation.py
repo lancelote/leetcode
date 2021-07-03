@@ -1,4 +1,5 @@
 import pytest
+
 from src.goal_parser_interpretation import Solution
 
 

@@ -1,4 +1,5 @@
 import pytest
+
 from src.decode_xored_array import Solution
 
 

@@ -1,4 +1,5 @@
 import pytest
+
 from src.maximum_nesting_depth_of_the_parentheses import Solution
 
 

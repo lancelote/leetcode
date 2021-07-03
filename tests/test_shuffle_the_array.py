@@ -1,4 +1,5 @@
 import pytest
+
 from src.shuffle_the_array import Solution
 
 
