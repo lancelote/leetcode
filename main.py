@@ -18,8 +18,8 @@ def exists(path: Path) -> None:
 def create_templates(name: str) -> None:
     filename = name.replace("-", "_")
 
-    src_file = Path("problems", "src", f"{filename}.py")
-    test_file = Path("problems", "tests", f"test_{filename}.py")
+    src_file = Path("src", f"{filename}.py")
+    test_file = Path("tests", f"test_{filename}.py")
 
     exists(src_file)
     exists(test_file)
