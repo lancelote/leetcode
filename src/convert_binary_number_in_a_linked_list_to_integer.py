@@ -8,11 +8,12 @@ class ListNode:
 
 
 class Solution:
-    def getDecimalValue(self, head: ListNode | None) -> int:
-        bits: list[str] = []
+    def getDecimalValue(self, head: ListNode) -> int:
+        answer = 0
+        current_node: ListNode | None = head
 
-        while head:
-            bits.append(str(head.val))
-            head = head.next
+        while current_node:
+            answer = (answer << 1) + current_node.val
+            current_node = current_node.next
 
-        return int("".join(bits), 2)
+        return answer
