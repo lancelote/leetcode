@@ -7,9 +7,6 @@ job("My project warmup data") {
         }
     }
     warmup(ide = Ide.Fleet, profileId = "fleet") {
-        requirements {
-            workerTags("fleet")
-        }
         scriptLocation = "./dev-env-warmup.sh"
     }
 }
