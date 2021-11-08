@@ -2,7 +2,10 @@
 .idea/
 
 # mypy
-.mypy_cache
+.mypy_cache/
+
+# pytest
+.pytest_cache/
 
 # Python
 __pycache__/
