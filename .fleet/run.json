@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "name": "tests",
+            "type": "command",
+            "program": "./.venv/bin/python",
+            "args": ["-mpytest"]
+        }
+    ]
+}
