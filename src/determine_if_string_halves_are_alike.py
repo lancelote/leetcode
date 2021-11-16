@@ -13,6 +13,7 @@ def count_vowels(text: str, start: int, stop: int) -> int:
 
 class Solution:
     def halvesAreAlike(self, text: str) -> bool:
-        first_half = count_vowels(text, 0, len(text) // 2)
-        second_half = count_vowels(text, len(text) // 2, len(text))
+        middle = len(text) // 2
+        first_half = count_vowels(text, start=0, stop=middle)
+        second_half = count_vowels(text, start=middle, stop=len(text))
         return first_half == second_half
