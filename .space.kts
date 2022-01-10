@@ -22,6 +22,6 @@ job("Warmup data for PyCharm") {
     }
     warmup(ide = Ide.PyCharm) {
         scriptLocation = "./dev-env-warmup.sh"
-        ideVersion = IdeVersion.LatestOfQuality("Stable")
+        ideVersion = IdeVersion.LatestOfQuality("Release")
     }
 }
