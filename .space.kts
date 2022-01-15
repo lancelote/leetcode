@@ -2,7 +2,7 @@ job("Warmup data for Fleet") {
     startOn {
         gitPush {
             branchFilter {
-                +"refs/heads/main"
+                +"refs/heads/master"
             }
         }
     }
@@ -16,7 +16,7 @@ job("Warmup data for PyCharm") {
     startOn {
         gitPush {
             branchFilter {
-                +"refs/heads/main"
+                +"refs/heads/master"
             }
         }
     }
