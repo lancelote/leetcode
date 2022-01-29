@@ -4,15 +4,14 @@ def isBadVersion(version: int) -> int:
 
 class Solution:
     def firstBadVersion(self, n: int) -> int:
-        oldest = 1
-        newest = n
+        left, right = 1, n
 
-        while oldest < newest:
-            version = oldest + (newest - oldest) // 2
+        while left < right:
+            middle = left + (right - left) // 2
 
-            if isBadVersion(version):
-                newest = version
+            if isBadVersion(middle):
+                right = middle
             else:
-                oldest = version + 1
+                left = middle + 1
 
-        return newest
+        return right
