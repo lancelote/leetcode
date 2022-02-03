@@ -17,6 +17,8 @@ def exists(path: Path) -> None:
 
 def create_templates(name: str) -> None:
     filename = name.replace("-", "_")
+    if filename[0].isalnum():
+        filename = f"_{filename}"
 
     src_file = Path("src", f"{filename}.py")
     test_file = Path("tests", f"test_{filename}.py")
