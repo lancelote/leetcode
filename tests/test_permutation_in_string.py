@@ -8,6 +8,7 @@ from src.permutation_in_string import Solution
     [
         ("ab", "eidbaooo", True),
         ("ab", "eidboaoo", False),
+        ("ab", "a", False),
     ],
 )
 def test_solution(s1, s2, expected):
