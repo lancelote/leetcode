@@ -14,7 +14,7 @@ class Solution:
             s1_counter[to_int(x1)] += 1
             s2_counter[to_int(x2)] += 1
 
-        similar = sum(c1 == c2 for c1, c2 in zip(s1_counter, s2_counter))
+        similar: int = sum(c1 == c2 for c1, c2 in zip(s1_counter, s2_counter))
 
         left = 0
         for right in range(len(s1), len(s2)):
