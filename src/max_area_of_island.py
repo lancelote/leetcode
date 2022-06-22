@@ -1,6 +1,6 @@
 from collections import deque
+from collections.abc import Iterator
 from typing import Deque
-from typing import Iterator
 
 Grid = list[list[int]]
 Position = tuple[int, int]
