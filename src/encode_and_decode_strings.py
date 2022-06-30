@@ -5,33 +5,32 @@ class Solution:
         return f"{length} {' '.join(lengths)} {''.join(text)}"
 
     def decode(self, data: str) -> list[str]:
-        i = 0
+        counter = 0
 
-        total_words_array = []
-        while data[i] != " ":
-            total_words_array.append(data[i])
-            i += 1
-        total_blocks = int("".join(total_words_array))
-        i += 1
+        def read_next_int() -> int:
+            nonlocal counter
+            read_array: list[str] = []
 
-        block_lengths: list[int] = []
+            while data[counter] != " ":
+                read_array.append(data[counter])
+                counter += 1
+            counter += 1
 
-        for _ in range(total_blocks):
-            block_length_array = []
-            while data[i] != " ":
-                block_length_array.append(data[i])
-                i += 1
-            block_length = int("".join(block_length_array))
-            block_lengths.append(block_length)
-            i += 1
+            number = int("".join(read_array))
+            return number
 
-        blocks: list[str] = []
-        for block_length in block_lengths:
-            block_array = []
-            for _ in range(block_length):
-                block_array.append(data[i])
-                i += 1
-            block = "".join(block_array)
-            blocks.append(block)
+        def read_next_block_of(length: int) -> str:
+            nonlocal counter
+            block_array: list[str] = []
+
+            for _ in range(length):
+                block_array.append(data[counter])
+                counter += 1
+
+            return "".join(block_array)
+
+        total_blocks = read_next_int()
+        block_lengths = [read_next_int() for _ in range(total_blocks)]
+        blocks = [read_next_block_of(length) for length in block_lengths]
 
         return blocks
