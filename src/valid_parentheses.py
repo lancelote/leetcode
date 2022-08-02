@@ -1,20 +1,12 @@
-PARENTHESES = {
-    "(": ")",
-    "{": "}",
-    "[": "]",
-}
+TO_CLOSING = {"(": ")", "{": "}", "[": "]"}
 
 
 class Solution:
-    def isValid(self, text: str) -> bool:
-        stack = []
-        for char in text:
-            if char in PARENTHESES.keys():
-                stack.append(char)
-            elif stack:
-                last = stack.pop()
-                if PARENTHESES.get(last) != char:
-                    return False
-            else:
+    def isValid(self, s: str) -> bool:
+        expected_stack: list[str] = []
+        for paren in s:
+            if paren in {"(", "{", "["}:
+                expected_stack.append(TO_CLOSING[paren])
+            elif not expected_stack or expected_stack.pop() != paren:
                 return False
-        return len(stack) == 0
+        return not expected_stack
