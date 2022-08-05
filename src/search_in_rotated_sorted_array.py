@@ -1,30 +1,27 @@
-def get_smallest__value_idx(nums: list[int]) -> int:
-    smallest = nums[0]
-    smallest_idx = 0
-    for i, num in enumerate(nums):
-        if num < smallest:
-            smallest = num
-            smallest_idx = i
-    return smallest_idx
-
-
 class Solution:
     def search(self, nums: list[int], target: int) -> int:
         assert nums
 
-        smallest_value_idx = get_smallest__value_idx(nums)
         left = 0
         right = len(nums) - 1
 
         while left <= right:
-            middle_idx = (right - left) // 2 + left
-            middle_value = nums[(middle_idx + smallest_value_idx) % len(nums)]
+            middle = (left + right) // 2
+            guess = nums[middle]
+            in_left_portion = guess >= nums[left]
+            is_too_small = guess < target
+            is_too_big = guess > target
 
-            if middle_value == target:
-                return (middle_idx + smallest_value_idx) % len(nums)
-            elif middle_value < target:
-                left = middle_idx + 1
+            if guess == target:
+                return middle
+            elif in_left_portion:
+                if is_too_small or target < nums[left]:
+                    left = middle + 1
+                else:
+                    right = middle - 1
             else:
-                right = middle_idx - 1
-
+                if is_too_big or target > nums[right]:
+                    right = middle - 1
+                else:
+                    left = middle + 1
         return -1
