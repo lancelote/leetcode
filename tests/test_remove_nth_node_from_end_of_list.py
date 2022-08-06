@@ -1,31 +1,8 @@
 import pytest
 
 from src.remove_nth_node_from_end_of_list import Solution
-from src.utils.linked_list import ListNode
-
-
-def to_linked(array: list[int]) -> ListNode | None:
-    if not array:
-        return None
-
-    dummy = ListNode()
-    tail = dummy
-
-    for x in array:
-        tail.next = ListNode(x)
-        tail = tail.next
-
-    return dummy.next
-
-
-def equal(l1: ListNode | None, l2: ListNode | None) -> bool:
-    while l1 and l2:
-        if l1.val != l2.val:
-            return False
-        l1 = l1.next
-        l2 = l2.next
-
-    return l1 is None and l2 is None
+from src.utils.linked_list import is_equal
+from src.utils.linked_list import to_linked_list
 
 
 @pytest.mark.parametrize(
@@ -37,7 +14,7 @@ def equal(l1: ListNode | None, l2: ListNode | None) -> bool:
     ],
 )
 def test_solution(head_array, n, expected_array):
-    head = to_linked(head_array)
-    expected = to_linked(expected_array)
+    head = to_linked_list(head_array)
+    expected = to_linked_list(expected_array)
 
-    assert equal(Solution().removeNthFromEnd(head, n), expected)
+    assert is_equal(Solution().removeNthFromEnd(head, n), expected)

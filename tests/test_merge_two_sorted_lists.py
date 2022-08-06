@@ -1,7 +1,7 @@
 import pytest
 
 from src.merge_two_sorted_lists import Solution
-from src.utils.linked_list import assert_linked_list
+from src.utils.linked_list import is_equal
 from src.utils.linked_list import to_linked_list
 
 
@@ -15,4 +15,4 @@ from src.utils.linked_list import to_linked_list
 )
 def test_solution(l1, l2, expected):
     result = Solution().mergeTwoLists(to_linked_list(l1), to_linked_list(l2))
-    assert_linked_list(result, to_linked_list(expected))
+    assert is_equal(result, to_linked_list(expected))

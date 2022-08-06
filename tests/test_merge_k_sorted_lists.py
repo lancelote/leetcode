@@ -1,59 +1,8 @@
 import pytest
 
 from src.merge_k_sorted_lists import Solution
-from src.utils.linked_list import ListNode
-
-
-def equal(l1: ListNode | None, l2: ListNode | None) -> bool:
-    while l1 and l2:
-        if l1.val != l2.val:
-            return False
-        l1 = l1.next
-        l2 = l2.next
-
-    return (l1 is None) and (l2 is None)
-
-
-@pytest.mark.parametrize(
-    "l1,l2,expected",
-    [
-        (None, ListNode(1), False),
-        (ListNode(1), None, False),
-        (None, None, True),
-        (ListNode(1), ListNode(2), False),
-        (ListNode(1), ListNode(1), True),
-        (ListNode(1, ListNode(2)), ListNode(1, ListNode(2)), True),
-        (ListNode(1), ListNode(1, ListNode(2)), False),
-        (ListNode(1, ListNode(2)), ListNode(1), False),
-    ],
-)
-def test_equal(l1, l2, expected):
-    assert equal(l1, l2) == expected
-
-
-def to_linked(array: list[int]) -> ListNode | None:
-    if not array:
-        return None
-
-    dummy_head = ListNode()
-    tail = dummy_head
-
-    for item in array:
-        tail.next = ListNode(item)
-        tail = tail.next
-
-    return dummy_head.next
-
-
-@pytest.mark.parametrize(
-    "array,expected_head",
-    [
-        ([1, 2, 3], ListNode(1, ListNode(2, ListNode(3)))),
-        ([], None),
-    ],
-)
-def test_to_linked(array, expected_head):
-    assert equal(to_linked(array), expected_head)
+from src.utils.linked_list import is_equal
+from src.utils.linked_list import to_linked_list
 
 
 @pytest.mark.parametrize(
@@ -65,7 +14,7 @@ def test_to_linked(array, expected_head):
     ],
 )
 def test_solution(lists, expected_list):
-    heads = [to_linked(x) for x in lists]
-    expected_head = to_linked(expected_list)
+    heads = [to_linked_list(x) for x in lists]
+    expected_head = to_linked_list(expected_list)
 
-    assert equal(Solution().mergeKLists(heads), expected_head)
+    assert is_equal(Solution().mergeKLists(heads), expected_head)
