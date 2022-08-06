@@ -1,16 +1,8 @@
-from typing import Optional
-
-OptNode = Optional["ListNode"]
-
-
-class ListNode:
-    def __init__(self, val: int = 0, next: OptNode = None) -> None:
-        self.val = val
-        self.next = next
+from src.utils.linked_list import ListNode
 
 
 class Solution:
-    def mergeKLists(self, lists: list[OptNode]) -> OptNode:
+    def mergeKLists(self, lists: list[ListNode | None]) -> ListNode | None:
         if not lists:
             return None
 
@@ -26,7 +18,9 @@ class Solution:
 
         return lists[0]
 
-    def mergeLists(self, l1: OptNode, l2: OptNode) -> OptNode:
+    def mergeLists(
+        self, l1: ListNode | None, l2: ListNode | None
+    ) -> ListNode | None:
         dummy_head = ListNode()
         tail = dummy_head
 

@@ -1,18 +1,10 @@
-from typing import Optional
-
-
-class ListNode:
-    def __init__(
-        self, val: int = 0, next: Optional["ListNode"] = None
-    ) -> None:
-        self.val = val
-        self.next = next
+from src.utils.linked_list import ListNode
 
 
 class Solution:
     def mergeTwoLists(
-        self, l1: Optional[ListNode], l2: Optional[ListNode]
-    ) -> Optional[ListNode]:
+        self, l1: ListNode | None, l2: ListNode | None
+    ) -> ListNode | None:
         if not l1:
             return l2
         if not l2:

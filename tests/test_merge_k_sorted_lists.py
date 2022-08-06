@@ -1,11 +1,10 @@
 import pytest
 
-from src.merge_k_sorted_lists import ListNode
-from src.merge_k_sorted_lists import OptNode
 from src.merge_k_sorted_lists import Solution
+from src.utils.linked_list import ListNode
 
 
-def equal(l1: OptNode, l2: OptNode) -> bool:
+def equal(l1: ListNode | None, l2: ListNode | None) -> bool:
     while l1 and l2:
         if l1.val != l2.val:
             return False
@@ -32,7 +31,7 @@ def test_equal(l1, l2, expected):
     assert equal(l1, l2) == expected
 
 
-def to_linked(array: list[int]) -> OptNode:
+def to_linked(array: list[int]) -> ListNode | None:
     if not array:
         return None
 

@@ -1,7 +1,7 @@
 import pytest
 
-from src.remove_duplicates_from_sorted_list import ListNode
 from src.remove_duplicates_from_sorted_list import Solution
+from src.utils.linked_list import ListNode
 
 
 def from_list_to_node(data: list[int], i: int = 0) -> ListNode | None:

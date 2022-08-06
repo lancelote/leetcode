@@ -1,19 +1,13 @@
-from typing import Optional
-
-OptNode = Optional["ListNode"]
-
-
-class ListNode:
-    def __init__(self, val: int = 0, next: OptNode = None) -> None:
-        self.val = val
-        self.next = next
+from src.utils.linked_list import ListNode
 
 
 class Solution:
-    def removeNthFromEnd(self, head: OptNode, n: int) -> OptNode:
+    def removeNthFromEnd(
+        self, head: ListNode | None, n: int
+    ) -> ListNode | None:
         dummy = ListNode(next=head)
-        left: OptNode = dummy
-        right: OptNode = head
+        left: ListNode | None = dummy
+        right: ListNode | None = head
 
         for _ in range(n):
             if right:

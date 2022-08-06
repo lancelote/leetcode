@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import pytest
 
-from src.convert_binary_number_in_a_linked_list_to_integer import ListNode
 from src.convert_binary_number_in_a_linked_list_to_integer import Solution
+from src.utils.linked_list import ListNode
 
 
 def to_list_node(items: list[int], i: int = 0) -> ListNode | None:

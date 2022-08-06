@@ -1,16 +1,8 @@
-from typing import Optional
-
-OptNode = Optional["ListNode"]
-
-
-class ListNode:
-    def __init__(self, val: int = 0, next: OptNode = None) -> None:
-        self.val = val
-        self.next = next
+from src.utils.linked_list import ListNode
 
 
 class Solution:
-    def middleNode(self, head: OptNode) -> OptNode:
+    def middleNode(self, head: ListNode | None) -> ListNode | None:
         slow, fast = head, head
 
         while slow and fast and fast.next:
