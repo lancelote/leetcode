@@ -17,14 +17,10 @@ class Solution:
                 l1 = l1.next
             tail = tail.next
 
-        while l1:
+        if l1:
             tail.next = l1
-            tail = l1
-            l1 = l1.next
 
-        while l2:
+        if l2:
             tail.next = l2
-            tail = l2
-            l2 = l2.next
 
         return dummy.next
