@@ -1,7 +1,14 @@
 import pytest
 
+from src.utils.binary_tree import insert
 from src.utils.binary_tree import tree_to_list
 from src.utils.binary_tree import TreeNode
+
+
+def test_insert_none():
+    root = TreeNode()
+    insert(root, None)
+    assert tree_to_list(root) == [0]
 
 
 @pytest.mark.parametrize(

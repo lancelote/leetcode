@@ -19,8 +19,10 @@ class TreeNode:
         return f"Node({self.val})"
 
 
-def insert(root: TreeNode | None, value: int) -> TreeNode:
-    if not root:
+def insert(root: TreeNode | None, value: int | None) -> TreeNode | None:
+    if not value:
+        pass
+    elif not root:
         return TreeNode(value)
     elif value < root.val:
         root.left = insert(root.left, value)
