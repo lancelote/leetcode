@@ -1,4 +1,4 @@
-from src.utils.binary_tree import TreeNode
+from src.utils.binary_search_tree import TreeNode
 
 
 class Solution:

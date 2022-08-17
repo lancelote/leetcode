@@ -1,7 +1,7 @@
 import pytest
 
 from src.range_sum_of_bst import Solution
-from src.utils.binary_tree import list_to_tree
+from src.utils.binary_search_tree import list_to_tree
 
 
 @pytest.mark.parametrize(
