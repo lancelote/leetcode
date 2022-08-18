@@ -19,37 +19,53 @@ class TreeNode:
         return f"Node({self.val})"
 
 
-def insert(root: TreeNode | None, value: int | None) -> TreeNode | None:
-    if not value:
-        pass
-    elif not root:
-        return TreeNode(value)
-    elif value < root.val:
-        root.left = insert(root.left, value)
-    else:
-        root.right = insert(root.right, value)
-    return root
+def tree_to_list(root: TreeNode | None) -> list[int | None]:
+    if not root:
+        return []
 
-
-def list_to_tree(values: list[int]) -> TreeNode | None:
-    root = None
-
-    for value in values:
-        root = insert(root, value)
-
-    return root
-
-
-def tree_to_list(root: TreeNode | None) -> list[int]:
-    result = []
+    result: list[int | None] = []
     to_visit: typing.Deque[TreeNode | None] = deque()
     to_visit.append(root)
 
     while to_visit:
         node = to_visit.popleft()
-        if node:
-            result.append(node.val)
+        result.append(node.val if node else None)
+        if node and (node.left or node.right):
             to_visit.append(node.left)
             to_visit.append(node.right)
 
     return result
+
+
+def list_to_tree(lst: list[int]) -> TreeNode | None:
+    if not lst:
+        return None
+
+    items = iter(lst)
+    to_visit: typing.Deque[TreeNode | None] = deque()
+    head = TreeNode(next(items))
+    to_visit.append(head)
+
+    while to_visit:
+        node = to_visit.pop()
+
+        if not node:
+            continue
+
+        try:
+            left_val = next(items)
+            left = TreeNode(left_val) if left_val else None
+            node.left = left
+            to_visit.append(left)
+
+            right_val = next(items)
+            right = TreeNode(right_val) if right_val else None
+            node.right = right
+            to_visit.append(right)
+        except StopIteration:
+            break
+
+    return head
+
+
+__all__ = ["TreeNode", "tree_to_list", "list_to_tree"]
