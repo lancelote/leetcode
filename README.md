@@ -1,6 +1,6 @@
 # leetcode
 
-My [leetcode](https://leetcode.com/) exercise solutions
+[My leetcode](https://leetcode.com/pkarateev/) exercise solutions
 
 ## Development Setup
 
