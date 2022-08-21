@@ -47,7 +47,7 @@ def list_to_tree(lst: list[int]) -> TreeNode | None:
     to_visit.append(head)
 
     while to_visit:
-        node = to_visit.pop()
+        node = to_visit.popleft()
 
         if not node:
             continue

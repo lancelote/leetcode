@@ -28,3 +28,17 @@ def test_tree_to_list(tree, expected_list):
 def test_list_to_tree(in_list, out_list):
     out_tree = list_to_tree(in_list)
     assert tree_to_list(out_tree) == out_list
+
+
+class TestListToTree:
+    def test_not_full_last_layer(self):
+        lst = [3, 4, 5, 1, 2]
+        tree = list_to_tree(lst)
+
+        assert tree.val == 3
+        assert tree.left.val == 4
+        assert tree.right.val == 5
+        assert tree.left.left.val == 1
+        assert tree.left.right.val == 2
+        assert tree.right.left is None
+        assert tree.right.right is None
