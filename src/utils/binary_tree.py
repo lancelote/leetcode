@@ -48,20 +48,20 @@ def list_to_tree(lst: list[int]) -> TreeNode | None:
 
     while to_visit:
         node = to_visit.popleft()
-
-        if not node:
-            continue
+        assert node
 
         try:
             left_val = next(items)
-            left = TreeNode(left_val) if left_val else None
+            left = None if left_val is None else TreeNode(left_val)
             node.left = left
-            to_visit.append(left)
+            if left:
+                to_visit.append(left)
 
             right_val = next(items)
-            right = TreeNode(right_val) if right_val else None
+            right = None if right_val is None else TreeNode(right_val)
             node.right = right
-            to_visit.append(right)
+            if right:
+                to_visit.append(right)
         except StopIteration:
             break
 

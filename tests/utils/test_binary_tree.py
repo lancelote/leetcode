@@ -23,6 +23,10 @@ def test_tree_to_list(tree, expected_list):
         ([1], [1]),
         ([1, 2], [1, 2, None]),
         ([1, None, 2], [1, None, 2]),
+        (
+            [3, 4, 5, 1, 2, None, None, None, None, 0],
+            [3, 4, 5, 1, 2, None, None, None, None, 0],
+        ),
     ],
 )
 def test_list_to_tree(in_list, out_list):
