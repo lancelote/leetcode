@@ -6,6 +6,9 @@ class ListNode:
         self.val = val
         self.next = next
 
+    def __repr__(self) -> str:
+        return f"ListNode({self.val})"
+
 
 def to_linked_list(array: list[int]) -> ListNode | None:
     if not array:
