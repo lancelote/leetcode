@@ -23,6 +23,7 @@ def tree_to_list(root: TreeNode | None) -> list[int | None]:
     if not root:
         return []
 
+    real_node_count = 1
     result: list[int | None] = []
     to_visit: typing.Deque[TreeNode | None] = deque()
     to_visit.append(root)
@@ -30,9 +31,19 @@ def tree_to_list(root: TreeNode | None) -> list[int | None]:
     while to_visit:
         node = to_visit.popleft()
         result.append(node.val if node else None)
-        if node and (node.left or node.right):
+        if node:
+            real_node_count -= 1
+
+            if not real_node_count and not (node.left or node.right):
+                break
+
             to_visit.append(node.left)
             to_visit.append(node.right)
+
+            if node.left:
+                real_node_count += 1
+            if node.right:
+                real_node_count += 1
 
     return result
 

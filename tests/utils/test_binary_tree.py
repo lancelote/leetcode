@@ -10,6 +10,15 @@ from src.utils.binary_tree import TreeNode
     [
         (None, []),
         (TreeNode(1, left=None, right=TreeNode(2)), [1, None, 2]),
+        (
+            TreeNode(
+                3,
+                TreeNode(4, TreeNode(1), TreeNode(2, TreeNode(0))),
+                TreeNode(5),
+            ),
+            [3, 4, 5, 1, 2, None, None, None, None, 0],
+        ),
+        (TreeNode(1, TreeNode(2)), [1, 2]),
     ],
 )
 def test_tree_to_list(tree, expected_list):
@@ -21,7 +30,7 @@ def test_tree_to_list(tree, expected_list):
     [
         ([], []),
         ([1], [1]),
-        ([1, 2], [1, 2, None]),
+        ([1, 2], [1, 2]),
         ([1, None, 2], [1, None, 2]),
         (
             [3, 4, 5, 1, 2, None, None, None, None, 0],
