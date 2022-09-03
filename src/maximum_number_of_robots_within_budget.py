@@ -9,18 +9,19 @@ class Solution:
         max_consecutive = 0
         sum_running_costs = 0
         max_charge_times: list[tuple[int, int]] = []
-        left = 0
+        left = right = 0
+
+        def over_budget() -> bool:
+            k = right - left + 1
+            max_charge_time = -max_charge_times[0][0]
+            cost = max_charge_time + sum_running_costs * k
+            return cost > budget
 
         for right in range(n):
             sum_running_costs += running_costs[right]
             heapq.heappush(max_charge_times, (-charge_times[right], right))
 
-            while (
-                max_charge_times
-                and (-max_charge_times[0][0])
-                + (right - left + 1) * sum_running_costs
-                > budget
-            ):
+            while max_charge_times and over_budget():
                 sum_running_costs -= running_costs[left]
                 if max_charge_times[0][1] <= left:
                     heapq.heappop(max_charge_times)
