@@ -7,21 +7,16 @@ class Solution:
 
         max_coverage = 0
         total_cols = len(mat[0])
-        row_sums = [sum(row) for row in mat]
 
         for selected_cols in combinations(list(range(total_cols)), cols):
-            row_sums_cache = [x for x in row_sums]
+            masked = 0
+            mask = sum(1 << col for col in selected_cols)
 
-            for i, row in enumerate(mat):
-                for selected_col in selected_cols:
-                    if row[selected_col] == 1:
-                        row_sums_cache[i] -= 1
+            for row in mat:
+                bin_row = int("".join(str(x) for x in row), 2)
+                if bin_row == bin_row & mask:
+                    masked += 1
 
-            current_coverage = 0
-            for x in row_sums_cache:
-                if x == 0:
-                    current_coverage += 1
-
-            max_coverage = max(max_coverage, current_coverage)
+            max_coverage = max(max_coverage, masked)
 
         return max_coverage
