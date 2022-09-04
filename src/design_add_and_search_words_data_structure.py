@@ -36,9 +36,3 @@ class WordDictionary:
             raise ValueError
 
         return dfs(self.root)
-
-
-# Your WordDictionary object will be instantiated and called as such:
-# obj = WordDictionary()
-# obj.addWord(word)
-# param_2 = obj.search(word)
