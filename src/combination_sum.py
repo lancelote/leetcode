@@ -23,6 +23,6 @@ class Solution:
                 path.pop()
 
         for start_idx in range(len(candidates)):
-            dfs(0, 0, [])
+            dfs(start_idx, 0, [])
 
         return combinations
