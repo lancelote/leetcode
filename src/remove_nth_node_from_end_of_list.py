@@ -6,21 +6,15 @@ class Solution:
         self, head: ListNode | None, n: int
     ) -> ListNode | None:
         dummy = ListNode(next=head)
-        left: ListNode | None = dummy
-        right: ListNode | None = head
+        slow, fast = dummy, dummy
 
         for _ in range(n):
-            if right:
-                right = right.next
+            assert fast.next
+            fast = fast.next
 
-        while right:
-            assert isinstance(left, ListNode)
+        while fast.next:
+            slow = slow.next
+            fast = fast.next
 
-            left = left.next
-            right = right.next
-
-        assert isinstance(left, ListNode)
-        assert isinstance(left.next, ListNode)
-
-        left.next = left.next.next
+        slow.next = slow.next.next
         return dummy.next
