@@ -1,10 +1,11 @@
 {
-    "configurations": [
-        {
-            "name": "tests",
-            "type": "command",
-            "program": "./.venv/bin/python",
-            "args": ["-mpytest"]
-        }
-    ]
+  "configurations": [
+    {
+      "type": "python-tests",
+      "name": "tests",
+      "testFramework": "pytest",
+      "target": " ",
+      "arguments": ["--path", "tests"],
+    }
+  ]
 }
