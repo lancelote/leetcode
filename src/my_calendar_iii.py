@@ -1,5 +1,5 @@
 class MyCalendarThree:
-    def __init__(self):
+    def __init__(self) -> None:
         self.points: list[tuple[int, int]] = []
 
     def book(self, start: int, end: int) -> int:
