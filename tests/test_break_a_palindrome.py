@@ -8,6 +8,7 @@ from src.break_a_palindrome import Solution
     [
         ("abccba", "aaccba"),
         ("a", ""),
+        ("aba", "abb"),
     ],
 )
 def test_solution(palindrome, expected):

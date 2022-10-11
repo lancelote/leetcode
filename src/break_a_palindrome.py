@@ -1,6 +1,6 @@
 class Solution:
     def breakPalindrome(self, palindrome: str) -> str:
-        for i, char in enumerate(palindrome):
-            if char != "a":
+        for i in range(len(palindrome) // 2):
+            if palindrome[i] != "a":
                 return palindrome[:i] + "a" + palindrome[i + 1 :]
-        return palindrome[-1] + "b" if palindrome[:-1] else ""
+        return palindrome[:-1] + "b" if palindrome[:-1] else ""
