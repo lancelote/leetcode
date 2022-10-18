@@ -9,18 +9,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-    - name: prepare
-      uses: actions/setup-python@v4
-      with:
-        python-version: "3.10"
+      - name: prepare
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
 
-    - name: install
-      run: pip install -r requirements.txt
+      - name: install
+        run: pip install -r requirements.txt
 
-    - name: test
-      run: PYTHONPATH=. pytest
+      - name: test
+        run: PYTHONPATH=. pytest
 
-    - name: lint
-      run: pre-commit run --all-files
+      - name: lint
+        run: pre-commit run --all-files
