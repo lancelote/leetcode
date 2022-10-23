@@ -1,14 +1,26 @@
+from typing import TypeAlias
+
+Matrix: TypeAlias = list[list[int]]
+
+
 class Solution:
-    def rotate(self, matrix: list[list[int]]) -> None:
+    def transpose(self, matrix: Matrix) -> None:
+        for c in range(len(matrix[0])):
+            for r in range(c, len(matrix)):
+                tmp = matrix[r][c]
+                matrix[r][c] = matrix[c][r]
+                matrix[c][r] = tmp
+
+    def reverse(self, matrix: Matrix) -> None:
+        for r in range(len(matrix)):
+            for c in range(len(matrix[0]) // 2):
+                tmp = matrix[r][c]
+                matrix[r][c] = matrix[r][-c - 1]
+                matrix[r][-c - 1] = tmp
+
+    def rotate(self, matrix: Matrix) -> None:
         assert matrix
         assert matrix[0]
 
-        n = len(matrix)
-
-        for r in range(n // 2):
-            for c in range(r, n - r - 1):
-                tmp = matrix[r][c]
-                matrix[r][c] = matrix[n - c - 1][r]
-                matrix[n - c - 1][r] = matrix[n - r - 1][n - c - 1]
-                matrix[n - r - 1][n - c - 1] = matrix[c][n - r - 1]
-                matrix[c][n - r - 1] = tmp
+        self.transpose(matrix)
+        self.reverse(matrix)
