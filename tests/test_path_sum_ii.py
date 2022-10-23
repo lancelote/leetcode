@@ -12,8 +12,8 @@ from src.utils.binary_tree import list_to_tree
             22,
             [[5, 4, 11, 2], [5, 8, 4, 5]],
         ),
-        # ([1, 2, 3], 5, []),
-        # ([1, 2], 0, []),
+        ([1, 2, 3], 5, []),
+        ([1, 2], 0, []),
     ],
 )
 def test_solution(in_list, target_sum, expected_paths):
