@@ -36,6 +36,26 @@ from src.shortest_path_in_a_grid_with_obstacles_elimination import Solution
             1,
             20,
         ),
+        (
+            [
+                [0, 0],
+                [1, 0],
+                [1, 0],
+                [1, 0],
+                [1, 0],
+                [1, 0],
+                [0, 0],
+                [0, 1],
+                [0, 1],
+                [0, 1],
+                [0, 0],
+                [1, 0],
+                [1, 0],
+                [0, 0],
+            ],
+            4,
+            14,
+        ),
     ],
 )
 def test_solution(grid, k, expected):
