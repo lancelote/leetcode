@@ -15,7 +15,7 @@ class TreeNode:
         self.left = left
         self.right = right
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"Node({self.val})"
 
 

@@ -1,4 +1,4 @@
-def get_mapping():
+def get_mapping() -> dict[str, str]:
     mapping = {}
 
     for i, ch in enumerate("abcdefghi", start=1):

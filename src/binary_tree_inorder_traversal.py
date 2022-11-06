@@ -6,7 +6,7 @@ class Solution:
         if not root:
             return []
 
-        node = root
+        node: TreeNode | None = root
         traversal: list[int] = []
         stack: list[TreeNode] = []
 

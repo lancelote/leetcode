@@ -13,8 +13,8 @@ class Solution:
             fast = fast.next
 
         while fast.next:
-            slow = slow.next
+            slow = slow.next  # type: ignore
             fast = fast.next
 
-        slow.next = slow.next.next
+        slow.next = slow.next.next  # type: ignore
         return dummy.next

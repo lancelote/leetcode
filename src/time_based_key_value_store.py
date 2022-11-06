@@ -3,7 +3,7 @@ from collections import defaultdict
 
 
 class TimeMap:
-    def __init__(self):
+    def __init__(self) -> None:
         self.data: dict[str, list[tuple[int, str]]] = defaultdict(list)
 
     def set(self, key: str, value: str, timestamp: int) -> None:

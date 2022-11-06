@@ -2,7 +2,7 @@ class Solution:
     def checkMove(
         self, board: list[list[str]], r: int, c: int, color: str
     ) -> bool:
-        def check(shift_r, shift_c) -> bool:
+        def check(shift_r: int, shift_c: int) -> bool:
             middle = False
             current_r, current_c = r + shift_r, c + shift_c
 

@@ -14,7 +14,14 @@ class Solution:
 
             new_node = Node(val=node.val)
             node_map[node.val] = new_node
-            new_node.neighbors = [clone(child) for child in node.neighbors]
+
+            neighbors: list[Node] = []
+            for child in node.neighbors:
+                clone_child = clone(child)
+                if clone_child:
+                    neighbors.append(clone_child)
+            new_node.neighbors = neighbors
+
             return new_node
 
         return clone(root)

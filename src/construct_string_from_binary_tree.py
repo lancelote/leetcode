@@ -2,7 +2,7 @@ from src.utils.binary_tree import TreeNode
 
 
 class Solution:
-    def tree2str(self, root: TreeNode | None) -> str:
+    def tree2str(self, root: TreeNode) -> str:
         result: list[str] = []
 
         def dfs(node: TreeNode) -> None:

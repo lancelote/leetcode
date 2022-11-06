@@ -1,11 +1,11 @@
 class Node:
-    def __init__(self):
+    def __init__(self) -> None:
         self.children: dict[str, Node] = {}
         self.end = False
 
 
 class Trie:
-    def __init__(self):
+    def __init__(self) -> None:
         self.root = Node()
 
     def insert(self, word: str) -> None:

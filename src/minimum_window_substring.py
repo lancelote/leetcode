@@ -38,4 +38,4 @@ class Solution:
                 left_i += 1
 
         left, right = result
-        return s[left : right + 1] if result != float("infinity") else ""
+        return s[left : right + 1]

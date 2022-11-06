@@ -14,7 +14,7 @@ SHIFTS = [
 ]
 
 
-def neighbors(position: Position, grid) -> Iterator[Position]:
+def neighbors(position: Position, grid: Grid) -> Iterator[Position]:
     assert grid
     assert grid[0]
 

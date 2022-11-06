@@ -10,8 +10,8 @@ class Solution:
         slow, fast = dummy, dummy
 
         while fast and fast.next and fast.next.next:
-            slow = slow.next
+            slow = slow.next  # type: ignore
             fast = fast.next.next
 
-        slow.next = slow.next.next
+        slow.next = slow.next.next  # type: ignore
         return dummy.next

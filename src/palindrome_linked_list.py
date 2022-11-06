@@ -30,13 +30,13 @@ class Solution:
         slow, fast = head, head
 
         while fast and fast.next and fast.next.next:
-            slow = slow.next
+            slow = slow.next  # type: ignore
             fast = fast.next.next
 
         if not fast.next:
             second_part = slow
         else:
-            second_part = slow.next
+            second_part = slow.next  # type: ignore
             slow.next = None
 
         second_reversed = reverse(second_part)
