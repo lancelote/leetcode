@@ -1,8 +1,5 @@
-from typing import List
-
-
 class Solution:
-    def shuffle(self, nums: List[int], n: int) -> List[int]:
+    def shuffle(self, nums: list[int], n: int) -> list[int]:
         assert len(nums) == n * 2, "Unexpected array length"
 
         result = []

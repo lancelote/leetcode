@@ -1,8 +1,5 @@
-from typing import List
-
-
 class Solution:
-    def runningSum(self, nums: List[int]) -> List[int]:
+    def runningSum(self, nums: list[int]) -> list[int]:
         total = 0
         result = []
 

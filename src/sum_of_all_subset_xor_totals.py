@@ -2,11 +2,10 @@ from functools import reduce
 from itertools import chain
 from itertools import combinations
 from operator import xor
-from typing import List
 
 
 class Solution:
-    def subsetXORSum(self, nums: List[int]) -> int:
+    def subsetXORSum(self, nums: list[int]) -> int:
         result = 0
 
         subsets = (combinations(nums, r) for r in range(len(nums) + 1))

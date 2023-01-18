@@ -34,4 +34,4 @@ class Solution:
         return "".join(TO_MORSE[letter] for letter in word)
 
     def uniqueMorseRepresentations(self, words: list[str]) -> int:
-        return len(set(self.to_morse(word) for word in words))
+        return len({self.to_morse(word) for word in words})

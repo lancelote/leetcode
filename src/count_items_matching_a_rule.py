@@ -1,9 +1,6 @@
-from typing import List
-
-
 class Solution:
     def countMatches(
-        self, items: List[List[str]], rule_key: str, rule_value: str
+        self, items: list[list[str]], rule_key: str, rule_value: str
     ) -> int:
         count = 0
 

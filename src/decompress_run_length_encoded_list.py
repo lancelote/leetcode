@@ -1,8 +1,5 @@
-from typing import List
-
-
 class Solution:
-    def decompressRLElist(self, nums: List[int]) -> List[int]:
+    def decompressRLElist(self, nums: list[int]) -> list[int]:
         result = []
 
         for i in range(0, len(nums), 2):

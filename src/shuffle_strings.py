@@ -1,6 +1,3 @@
-from typing import List
-
-
 class Solution:
-    def restoreString(self, text: str, indexes: List[int]) -> str:
+    def restoreString(self, text: str, indexes: list[int]) -> str:
         return "".join(letter for (_, letter) in sorted(zip(indexes, text)))

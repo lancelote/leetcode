@@ -1,8 +1,7 @@
 from collections.abc import Iterator
-from typing import Tuple
 
 
-def tuples(sentence: str) -> Iterator[Tuple[int, str]]:
+def tuples(sentence: str) -> Iterator[tuple[int, str]]:
     for item in sentence.split(" "):
         yield int(item[-1]), item[:-1]
 

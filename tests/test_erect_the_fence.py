@@ -14,6 +14,6 @@ from src.erect_the_fence import Solution
     ],
 )
 def test_solution(trees, expected):
-    set_expected = set((x, y) for x, y in expected)
-    set_actual = set((x, y) for x, y in Solution().outerTrees(trees))
+    set_expected = {(x, y) for x, y in expected}
+    set_actual = {(x, y) for x, y in Solution().outerTrees(trees)}
     assert set_expected == set_actual

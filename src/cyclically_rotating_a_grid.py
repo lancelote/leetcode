@@ -1,10 +1,9 @@
 from collections.abc import Iterator
-from typing import Tuple
 
 Grid = list[list[int]]
 Layer = list[int]
 Layers = list[Layer]
-Coordinates = Tuple[int, int]
+Coordinates = tuple[int, int]
 
 
 def layer_coordinates(

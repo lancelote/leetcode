@@ -1,8 +1,5 @@
-from typing import List
-
-
 class Solution:
-    def decode(self, encoded: List[int], first: int) -> List[int]:
+    def decode(self, encoded: list[int], first: int) -> list[int]:
         result = [first]
 
         for encoded_item in encoded:
