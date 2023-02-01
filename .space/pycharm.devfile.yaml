@@ -1,0 +1,20 @@
+schemaVersion: 2.2.0
+metadata:
+  name: 'My custom dev env configuration'
+attributes:
+  space:
+    instanceType: regular
+    editor:
+      type: PyCharm
+      version: '2023.1'
+      updateChannel: EAP
+      vmoptions:
+      - '-Xms2048m'
+      - '-Xmx4096m'
+components:
+- name: dev-container
+  image:
+  imageName: leetcode-dev:latest
+  dockerfile:
+    buildContext: .docker
+    uri: .docker/Dockerfile
