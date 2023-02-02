@@ -14,7 +14,7 @@ attributes:
 components:
 - name: dev-container
   image:
-  imageName: leetcode-dev:latest
-  dockerfile:
-    buildContext: .docker
-    uri: .docker/Dockerfile
+    imageName: leetcode-dev:latest
+    dockerfile:
+      buildContext: .docker
+      uri: .docker/Dockerfile
