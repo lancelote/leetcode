@@ -26,3 +26,14 @@ exclude = [
     '.venv/'
 ]
 strict = true
+
+[tool.ruff]
+exclude = [
+    ".git",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".venv"
+]
+line-length = 80
+target-version = "py311"
