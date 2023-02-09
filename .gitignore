@@ -10,3 +10,6 @@
 # Python
 __pycache__/
 .venv/
+
+# ruff
+.ruff_cache/
