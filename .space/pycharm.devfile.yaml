@@ -1,6 +1,6 @@
 schemaVersion: 2.2.0
 metadata:
-  name: 'My custom dev env configuration'
+  name: 'PyCharm dev env configuration'
 attributes:
   space:
     instanceType: regular
@@ -9,12 +9,22 @@ attributes:
       version: '2023.1'
       updateChannel: EAP
       vmoptions:
-      - '-Xms2048m'
-      - '-Xmx4096m'
+        - '-Xms2048m'
+        - '-Xmx4096m'
+    warmup:
+      startOn:
+        - type: gitPush
+          branchFilter:
+            include:
+              - 'refs/heads/main'
+      script:
+        ./dev-env-warmup.sh
 components:
-- name: dev-container
-  image:
-    imageName: leetcode-dev:latest
-    dockerfile:
-      buildContext: .docker
-      uri: .docker/Dockerfile
+  - name: dev-container
+    # ToDo: build and publish the image to Space Packages to save time
+    # ToDo: move `PYCHARM_PYTHON_PATH` env declaration here from `Dockerfile`
+    image:
+      imageName: leetcode-dev:latest
+      dockerfile:
+        buildContext: .docker
+        uri: .docker/Dockerfile
