@@ -1,6 +1,5 @@
 black==23.1.0
 click==8.1.3
-flake8==6.0.0
 mypy==1.0.0
 pre-commit==3.0.4
 pur==7.0.0
