@@ -9,6 +9,7 @@ from src.sqrtx import Solution
         (4, 2),
         (8, 2),
         (1, 1),
+        (0, 0),
     ],
 )
 def test_solution(x, expected_root):
