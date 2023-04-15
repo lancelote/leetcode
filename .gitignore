@@ -13,3 +13,6 @@ __pycache__/
 
 # ruff
 .ruff_cache/
+
+# Emacs
+*~
