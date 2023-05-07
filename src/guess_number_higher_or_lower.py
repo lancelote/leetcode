@@ -14,16 +14,17 @@ def guess(num: int) -> int:
 
 class Solution:
     def guessNumber(self, n: int) -> int:
-        left, right = 1, n
+        left, right = 0, n
 
         while left <= right:
-            middle = (right - left) // 2 + left
+            middle = left + (right - left) // 2
             attempt = guess(middle)
-            if attempt == -1:
-                right = middle - 1
-            elif attempt == 1:
+
+            if attempt > 0:
                 left = middle + 1
+            elif attempt < 0:
+                right = middle - 1
             else:
                 return middle
 
-        raise ValueError
+        raise ValueError("no answer found")
