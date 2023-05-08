@@ -1,17 +1,15 @@
-Matrix = list[list[int]]
-
-
-def is_diagonal(i: int, j: int, matrix: Matrix) -> bool:
-    return i == j or i + j == len(matrix) - 1
-
-
 class Solution:
-    def diagonalSum(self, matrix: Matrix) -> int:
+    def diagonalSum(self, mat: list[list[int]]) -> int:
+        n = len(mat)
         total = 0
 
-        for i, row in enumerate(matrix):
-            for j, element in enumerate(row):
-                if is_diagonal(i, j, matrix):
-                    total += element
+        for i in range(n):
+            total += mat[i][i]
+
+        for i in range(n):
+            total += mat[i][n - i - 1]
+
+        if n % 2 != 0:
+            total -= mat[n // 2][n // 2]
 
         return total
