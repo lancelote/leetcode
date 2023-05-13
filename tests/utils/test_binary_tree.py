@@ -1,5 +1,6 @@
 import pytest
 
+from src.utils.binary_tree import find_node
 from src.utils.binary_tree import list_to_tree
 from src.utils.binary_tree import tree_to_list
 from src.utils.binary_tree import TreeNode
@@ -55,3 +56,15 @@ class TestListToTree:
         assert tree.left.right.val == 2
         assert tree.right.left is None
         assert tree.right.right is None
+
+
+def test_find_node():
+    tree = TreeNode(0, TreeNode(1), TreeNode(2))
+
+    node_0 = tree
+    node_1 = tree.left
+    node_2 = tree.right
+
+    assert find_node(tree, 0) is node_0
+    assert find_node(tree, 1) is node_1
+    assert find_node(tree, 2) is node_2

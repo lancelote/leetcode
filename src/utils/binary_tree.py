@@ -79,4 +79,12 @@ def list_to_tree(lst: list[int]) -> TreeNode | None:
     return head
 
 
-__all__ = ["TreeNode", "tree_to_list", "list_to_tree"]
+def find_node(tree: TreeNode | None, x: int) -> TreeNode | None:
+    if not tree:
+        return None
+    if tree.val == x:
+        return tree
+    return find_node(tree.left, x) or find_node(tree.right, x)
+
+
+__all__ = ["TreeNode", "tree_to_list", "list_to_tree", "find_node"]
