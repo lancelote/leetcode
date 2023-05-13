@@ -15,15 +15,14 @@ class Solution:
         if original and original.val == target.val:
             return cloned
 
-        assert original and cloned
         left = (
             self.getTargetCopy(original.left, cloned.left, target)
-            if original
+            if original and cloned
             else None
         )
 
         return (
             left or self.getTargetCopy(original.right, cloned.right, target)
-            if original
+            if original and cloned
             else None
         )
