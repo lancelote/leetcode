@@ -6,7 +6,7 @@ attributes:
     instanceType: regular
     editor:
       type: PyCharm
-      version: '2023.1'
+      version: '2023.2'
       updateChannel: EAP
       vmoptions:
         - '-Xms2048m'
@@ -22,7 +22,6 @@ attributes:
 components:
   - name: dev-container
     # ToDo: build and publish the image to Space Packages to save time
-    # ToDo: move `PYCHARM_PYTHON_PATH` env declaration here from `Dockerfile`
     image:
       imageName: leetcode-dev:latest
       dockerfile:
