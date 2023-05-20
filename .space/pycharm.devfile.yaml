@@ -16,7 +16,7 @@ attributes:
         - type: gitPush
           branchFilter:
             include:
-              - 'refs/heads/main'
+              - 'refs/heads/master'
       script:
         ./dev-env-warmup.sh
 components:
