@@ -6,16 +6,16 @@ class Solution:
         if not root:
             return []
 
-        node: TreeNode | None = root
-        traversal: list[int] = []
         stack: list[TreeNode] = []
+        result: list[int] = []
+        current: TreeNode | None = root
 
-        while node or stack:
-            while node:
-                stack.append(node)
-                node = node.left
-            node = stack.pop()
-            traversal.append(node.val)
-            node = node.right
+        while current or stack:
+            while current:
+                stack.append(current)
+                current = current.left
+            current = stack.pop()
+            result.append(current.val)
+            current = current.right
 
-        return traversal
+        return result
