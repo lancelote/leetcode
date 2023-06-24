@@ -1,6 +1,6 @@
 import pytest
 
-from sample2 import Solution
+from src.construct_the_longest_new_string import Solution
 
 
 @pytest.mark.parametrize(
