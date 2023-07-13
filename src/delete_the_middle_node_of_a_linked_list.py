@@ -3,15 +3,15 @@ from src.utils.linked_list import ListNode
 
 class Solution:
     def deleteMiddle(self, head: ListNode | None) -> ListNode | None:
-        if not head:
-            return None
+        dummy = ListNode(-1, next=head)
 
-        dummy = ListNode(next=head)
-        slow, fast = dummy, dummy
+        slow = fast = dummy
 
-        while fast and fast.next and fast.next.next:
+        while slow and fast and fast.next and fast.next.next:
             slow = slow.next  # type: ignore
             fast = fast.next.next
 
-        slow.next = slow.next.next  # type: ignore
+        if slow.next:
+            slow.next = slow.next.next
+
         return dummy.next
