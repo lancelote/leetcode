@@ -3,13 +3,12 @@ from src.utils.linked_list import ListNode
 
 class Solution:
     def reverseList(self, head: ListNode | None) -> ListNode | None:
-        prev: ListNode | None = None
-        current = head
+        previous = None
 
-        while current:
-            tmp = current.next
-            current.next = prev
-            prev = current
-            current = tmp
+        while head:
+            tmp = head.next
+            head.next = previous
+            previous = head
+            head = tmp
 
-        return prev
+        return previous
