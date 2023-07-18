@@ -3,15 +3,18 @@ from src.utils.binary_tree import TreeNode
 
 class Solution:
     def maxDepth(self, root: TreeNode | None) -> int:
-        max_depth = 0
-        stack: list[tuple[TreeNode | None, int]] = [(root, 1)]
+        def dfs(head: TreeNode | None, depth: int) -> int:
+            if not head:
+                return depth
+            elif head.left and head.right:
+                return max(
+                    dfs(head.left, depth + 1), dfs(head.right, depth + 1)
+                )
+            elif head.left:
+                return dfs(head.left, depth + 1)
+            elif head.right:
+                return dfs(head.right, depth + 1)
+            else:
+                return depth + 1
 
-        while stack:
-            node, depth = stack.pop()
-
-            if node:
-                max_depth = max(max_depth, depth)
-                stack.append((node.left, depth + 1))
-                stack.append((node.right, depth + 1))
-
-        return max_depth
+        return dfs(root, 0)
