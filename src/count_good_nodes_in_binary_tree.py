@@ -2,20 +2,14 @@ from src.utils.binary_tree import TreeNode
 
 
 class Solution:
-    def goodNodes(self, root: TreeNode) -> int:
-        good = 0
-
-        def dfs(node: TreeNode | None, limit: int) -> None:
-            nonlocal good
-
+    def goodNodes(self, head: TreeNode) -> int:
+        def dfs(node: TreeNode | None, limit: int) -> int:
             if not node:
-                return
+                return 0
 
-            if node.val >= limit:
-                good += 1
+            new_limit = max(limit, node.val)
+            left = dfs(node.left, new_limit)
+            right = dfs(node.right, new_limit)
+            return (node.val >= limit) + left + right
 
-            dfs(node.left, max(node.val, limit))
-            dfs(node.right, max(node.val, limit))
-
-        dfs(root, root.val)
-        return good
+        return dfs(head, head.val)
