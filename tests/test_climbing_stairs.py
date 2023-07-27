@@ -9,6 +9,7 @@ from src.climbing_stairs import Solution
         (2, 2),
         (3, 3),
         (5, 8),
+        (1, 1),
     ],
 )
 def test_solution(n, expected):
