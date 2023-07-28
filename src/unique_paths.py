@@ -1,18 +1,15 @@
 class Solution:
-    def uniquePaths(self, rows: int, cols: int) -> int:
-        dp = [[0] * cols for _ in range(rows)]
-        dp[-1][-1] = 1
+    def uniquePaths(self, m: int, n: int) -> int:
+        cache = [[0] * n for _ in range(m)]
 
         def dfs(r: int, c: int) -> int:
-            if r >= rows or c >= cols:
+            if r == m or c == n:
                 return 0
+            if r == m - 1 and c == n - 1:
+                return 1
+            if cache[r][c]:
+                return cache[r][c]
+            cache[r][c] = dfs(r + 1, c) + dfs(r, c + 1)
+            return cache[r][c]
 
-            if dp[r][c] != 0:
-                return dp[r][c]
-
-            result = dfs(r + 1, c) + dfs(r, c + 1)
-            dp[r][c] = result
-            return result
-
-        dfs(0, 0)
-        return dp[0][0]
+        return dfs(0, 0)
