@@ -1,24 +1,15 @@
 class Solution:
     def longestCommonSubsequence(self, text1: str, text2: str) -> int:
-        cols = len(text1)
-        rows = len(text2)
+        rows = len(text1)
+        cols = len(text2)
 
-        dp = [[0] * cols for _ in range(rows)]
+        cache = [[0] * (cols + 1) for _ in range(rows + 1)]
 
-        def dfs(r: int, c: int) -> int:
-            if r >= rows or c >= cols:
-                return 0
+        for r in range(rows - 1, -1, -1):
+            for c in range(cols - 1, -1, -1):
+                if text1[r] == text2[c]:
+                    cache[r][c] = 1 + cache[r + 1][c + 1]
+                else:
+                    cache[r][c] = max(cache[r + 1][c], cache[r][c + 1])
 
-            if dp[r][c]:
-                return dp[r][c]
-
-            if text1[c] == text2[r]:
-                result = 1 + dfs(r + 1, c + 1)
-            else:
-                result = max(dfs(r + 1, c), dfs(r, c + 1))
-
-            dp[r][c] = result
-            return result
-
-        dfs(0, 0)
-        return dp[0][0]
+        return cache[0][0]
