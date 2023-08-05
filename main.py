@@ -20,11 +20,11 @@ def exists(path: Path) -> None:
 def parse_slug(problem: str) -> str:
     if problem.startswith("https"):
         url = urlparse(problem)
-        path = url.path
+        segments = url.path.split("/")
 
-        assert not path[0] and path[1] == "problems", f"invalid {url=}"
+        assert not segments[0] and segments[1] == "problems", f"invalid {url=}"
 
-        return url.path.split("/")[2]
+        return segments[2]
     else:
         return problem
 
