@@ -1,11 +1,13 @@
 from pathlib import Path
+from urllib.parse import urlparse
 
 import click
 
 
 @click.command()
-@click.argument("slug")
-def cli(slug: str) -> None:
+@click.argument("problem")
+def cli(problem: str) -> None:
+    slug = parse_slug(problem)
     create_templates(slug)
 
 
@@ -13,6 +15,18 @@ def exists(path: Path) -> None:
     if path.exists():
         print(f"{path} already exists")
         exit(1)
+
+
+def parse_slug(problem: str) -> str:
+    if problem.startswith("https"):
+        url = urlparse(problem)
+        path = url.path
+
+        assert not path[0] and path[1] == "problems", f"invalid {url=}"
+
+        return url.path.split("/")[2]
+    else:
+        return problem
 
 
 def create_templates(name: str) -> None:
