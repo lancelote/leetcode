@@ -1,8 +1,10 @@
 class Solution:
     def rob(self, nums: list[int]) -> int:
+        assert nums
+
         a = b = 0
 
-        for x in nums:
-            a, b = b, max(a + x, b)
+        for num in nums:
+            a, b = b, max(num + a, b)
 
-        return b
+        return max(a, b)
