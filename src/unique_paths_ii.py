@@ -1,19 +1,26 @@
 class Solution:
     def uniquePathsWithObstacles(self, grid: list[list[int]]) -> int:
-        assert grid
-        assert grid[0]
+        if grid[-1][-1]:
+            return 0
 
         rows = len(grid)
         cols = len(grid[0])
 
-        row = [0] * cols
-        row[-1] = 1
+        dp = [0] * cols
+        dp[-1] = 1
 
         for r in range(rows - 1, -1, -1):
+            new_dp = [0] * cols
+
             for c in range(cols - 1, -1, -1):
                 if grid[r][c]:
-                    row[c] = 0
-                else:
-                    row[c] += row[c + 1] if c < cols - 1 else 0
+                    new_dp[c] = 0
+                    continue
 
-        return row[0]
+                if r < rows:
+                    new_dp[c] += dp[c]
+                if c < (cols - 1):
+                    new_dp[c] += new_dp[c + 1]
+
+            dp = new_dp
+        return dp[0]
