@@ -1,6 +1,6 @@
 [tool.black]
 line-length = 79
-target-version = ['py311']
+target-version = ['py312']
 exclude = '''
 /(
     \.eggs
@@ -18,7 +18,7 @@ exclude = '''
 '''
 
 [tool.mypy]
-python_version = "3.11"
+python_version = "3.12"
 warn_return_any = true
 warn_unused_configs = true
 exclude = [
@@ -36,4 +36,4 @@ exclude = [
     ".venv"
 ]
 line-length = 80
-target-version = "py311"
+target-version = "py312"
