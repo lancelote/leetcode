@@ -3,7 +3,7 @@ class Solution:
         n1 = len(word1)
         n2 = len(word2)
 
-        dp = [x for x in range(n2, -1, -1)]
+        dp = list(list(range(n2, -1, -1)))
 
         for i1 in range(n1 - 1, -1, -1):
             new_dp = [0] * (n2 + 1)
@@ -11,17 +11,9 @@ class Solution:
 
             for i2 in range(n2 - 1, -1, -1):
                 if word1[i1] == word2[i2]:
-                    new_dp[i2] = min(
-                        1 + dp[i2],
-                        dp[i2 + 1],
-                        1 + new_dp[i2 + 1],
-                    )
+                    new_dp[i2] = dp[i2 + 1]
                 else:
-                    new_dp[i2] = min(
-                        1 + dp[i2],
-                        1 + dp[i2 + 1],
-                        1 + new_dp[i2 + 1],
-                    )
+                    new_dp[i2] = 1 + min(dp[i2], new_dp[i2 + 1], dp[i2 + 1])
 
             dp = new_dp
         return dp[0]
