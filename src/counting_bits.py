@@ -5,7 +5,7 @@ class Solution:
 
         for x in range(1, n + 1):
             if offset * 2 == x:
-                offset = x
+                offset *= 2
             dp[x] = 1 + dp[x - offset]
 
         return dp
