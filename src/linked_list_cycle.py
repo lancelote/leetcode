@@ -3,12 +3,9 @@ from src.utils.linked_list import ListNode
 
 class Solution:
     def hasCycle(self, head: ListNode | None) -> bool:
-        slow = head
-        fast = head
+        slow = fast = head
 
-        while fast and fast.next:
-            assert slow
-
+        while slow and fast and fast.next and fast.next.next:
             slow = slow.next
             fast = fast.next.next
 

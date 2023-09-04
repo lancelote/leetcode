@@ -15,3 +15,7 @@ def test_solution_false():
     head = ListNode(1, ListNode(2))
 
     assert Solution().hasCycle(head) is False
+
+
+def test_empty():
+    assert Solution().hasCycle(None) is False
