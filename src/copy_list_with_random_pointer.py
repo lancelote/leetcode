@@ -9,51 +9,34 @@ class Node:
         self.next = next
         self.random = random
 
+    def __str__(self) -> str:
+        return f"Node({self.val})"
+
 
 class Solution:
     def copyRandomList(self, head: Node | None) -> Node | None:
-        old_nodes: dict[Node, int] = {}
-        new_nodes: dict[int, Node] = {}
+        new_dummy = Node(-1)
+        old_dummy = Node(-1, next=head)
 
-        # construct map of old nodes
-        i = 0
-        current: Node | None = head
+        old_to_new: dict[Node | None, Node | None] = {None: None}
 
-        while current:
-            old_nodes[current] = i
+        new_current = new_dummy
+        old_current = old_dummy
 
-            i += 1
-            current = current.next
-
-        # construct copy without random
-        dummy = Node(-1)
-        new_current = dummy
-
-        i = 0
-        current = head
-
-        while current:
-            new_node = Node(x=current.val)
+        while old_current.next:
+            old_current = old_current.next
+            new_node = Node(old_current.val)
             new_current.next = new_node
-            new_current = new_node
-            new_nodes[i] = new_node
+            new_current = new_current.next
 
-            i += 1
-            current = current.next
+            old_to_new[old_current] = new_current
 
-        # set random in copy
-        i = 0
-        current = head
-        new_head: Node | None = dummy.next
+        new_current = new_dummy
+        old_current = old_dummy
 
-        while current:
-            assert new_head
+        while old_current.next and new_current.next:
+            old_current = old_current.next
+            new_current = new_current.next
+            new_current.random = old_to_new[old_current.random]
 
-            if current.random:
-                new_head.random = new_nodes[old_nodes[current.random]]
-
-            i += 1
-            current = current.next
-            new_head = new_head.next
-
-        return dummy.next
+        return new_dummy.next
