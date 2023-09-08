@@ -3,14 +3,13 @@ class Solution:
         result: list[list[int]] = [[1]]
 
         for _ in range(num_rows - 1):
-            row: list[int] = []
+            line: list[int] = []
 
             for i in range(len(result[-1]) + 1):
-                new_item = 0
-                new_item += result[-1][i - 1] if 0 <= i - 1 else 0
-                new_item += result[-1][i] if i < len(result[-1]) else 0
-                row.append(new_item)
+                left = result[-1][i - 1] if i - 1 >= 0 else 0
+                right = result[-1][i] if i < len(result[-1]) else 0
+                line.append(left + right)
 
-            result.append(row)
+            result.append(line)
 
         return result
