@@ -11,6 +11,7 @@ class Solution:
             b = -heapq.heappop(heap)
 
             if a != b:
-                heapq.heappush(heap, min(a, b) - max(a, b))
+                c = abs(a - b)
+                heapq.heappush(heap, -c)
 
         return -heap[0] if heap else 0
