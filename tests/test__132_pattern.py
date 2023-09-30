@@ -9,6 +9,7 @@ from src._132_pattern import Solution
         ([1, 2, 3, 4], False),
         ([3, 1, 4, 2], True),
         ([-1, 3, 2, 0], True),
+        ([3, 5, 0, 3, 4], True),
     ],
 )
 def test_solution(nums, is_expected_pattern):
