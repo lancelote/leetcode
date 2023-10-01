@@ -1,14 +1,24 @@
+from collections.abc import Iterator
+
+
+def words(text: str) -> Iterator[str]:
+    stack: list[str] = []
+
+    for x in text.strip():
+        if x == " ":
+            yield "".join(stack)
+            stack.clear()
+        else:
+            stack.append(x)
+
+    yield "".join(stack)
+
+
 class Solution:
-    def reverseWord(self, word: str) -> str:
-        result = list(word)
-        left, right = 0, len(word) - 1
-
-        while left < right:
-            result[left], result[right] = result[right], result[left]
-            left += 1
-            right -= 1
-
-        return "".join(result)
-
     def reverseWords(self, s: str) -> str:
-        return " ".join(self.reverseWord(word) for word in s.split(" "))
+        result: list[str] = []
+
+        for word in words(s):
+            result.append(word[::-1])
+
+        return " ".join(result)
