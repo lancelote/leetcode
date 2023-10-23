@@ -1,10 +1,6 @@
-import functools
-import operator
-
-POWERS_OF_4_XOR = functools.reduce(operator.xor, (4**x for x in range(16)))
-
-
 class Solution:
     def isPowerOfFour(self, n: int) -> bool:
-        is_power_of_two = n & (n - 1) == 0
-        return n > 0 and is_power_of_two and (POWERS_OF_4_XOR & n == n)
+        bin_val = bin(n)[2:]
+        n = len(bin_val)
+        zeros = bin_val.count("0")
+        return bin_val[0] == "1" and zeros == n - 1 and zeros % 2 == 0
