@@ -1,22 +1,30 @@
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-        assert s
+        n = len(s)
+        longest_sub = ""
+        longest_len = 0
 
-        longest = s[0]
+        def check_palindrome(left: int, right: int) -> None:
+            nonlocal longest_sub
+            nonlocal longest_len
 
-        for i in range(len(s)):
-            left, right = i - 1, i + 1
+            current = 0
 
-            while left >= 0 and right < len(s) and s[left] == s[right]:
-                longest = max(longest, s[left : right + 1], key=len)
+            while left >= 0 and right < n:
+                if s[left] == s[right]:
+                    current += 1 + (left != right)
+                else:
+                    break
+
+                if current > longest_len:
+                    longest_len = current
+                    longest_sub = s[left : right + 1]
+
                 left -= 1
                 right += 1
 
-            left, right = i, i + 1
+        for i in range(n):
+            check_palindrome(i, i)
+            check_palindrome(i, i + 1)
 
-            while left >= 0 and right < len(s) and s[left] == s[right]:
-                longest = max(longest, s[left : right + 1], key=len)
-                left -= 1
-                right += 1
-
-        return longest
+        return longest_sub
