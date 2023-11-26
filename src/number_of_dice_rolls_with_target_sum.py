@@ -1,23 +1,17 @@
-from typing import TypeAlias
-
-Cache: TypeAlias = dict[tuple[int, int], int]
-
-
-def dp(n: int, k: int, target: int, cache: Cache) -> int:
-    if n == 0:
-        return 0 if target != 0 else 1
-
-    if (n, target) in cache:
-        return cache[(n, target)]
-
-    result = 0
-    for new_target in range(max(0, target - k), target):
-        result += dp(n - 1, k, new_target, cache)
-    cache[(n, target)] = result
-
-    return result
+MOD = 10**9 + 7
 
 
 class Solution:
     def numRollsToTarget(self, n: int, k: int, target: int) -> int:
-        return dp(n, k, target, cache={}) % (10**9 + 7)
+        dp = [[0] * target for _ in range(n)]
+
+        for i in range(min(k, target)):
+            dp[0][i] = 1
+
+        for r in range(1, n):
+            for c in range(r, target):
+                dp[r][c] = sum(
+                    dp[r - 1][c - i] for i in range(1, k + 1) if c - i >= 0
+                )
+
+        return dp[-1][-1] % MOD
