@@ -23,17 +23,18 @@ class LRUCache:
 
         self.size = 0
 
-    def insert(self, node: Node) -> None:
+    def insert_as_head(self, node: Node) -> None:
         node.next = self.head.next
         self.head.next = node
         node.prev = self.head
+
         assert node.next
         node.next.prev = node
 
     @staticmethod
     def remove(node: Node) -> None:
-        assert node.prev
         assert node.next
+        assert node.prev
 
         node.prev.next = node.next
         node.next.prev = node.prev
@@ -42,7 +43,7 @@ class LRUCache:
         if key in self.cache:
             node = self.cache[key]
             self.remove(node)
-            self.insert(node)
+            self.insert_as_head(node)
             return node.val
         else:
             return -1
@@ -64,4 +65,4 @@ class LRUCache:
                 del self.cache[oldest_node.key]
                 self.size -= 1
 
-        self.insert(node)
+        self.insert_as_head(node)
