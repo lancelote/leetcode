@@ -1,47 +1,72 @@
-class Node:
-    def __init__(self, key: int = -1, val: int = -1) -> None:
+class Pair:
+    def __init__(self, key: int, val: int) -> None:
         self.key = key
         self.val = val
-        self.next: Node | None = None
+        self.next: Pair | None = None
 
 
 class MyHashMap:
     def __init__(self) -> None:
-        self.data = [Node()] * 1000
+        self.size = 0
+        self.capacity = 2
+        self.data: list[Pair | None] = [None, None]
 
     def put(self, key: int, value: int) -> None:
-        current: Node | None = self.data[key % 1000]
+        index = self.hash(key)
+        pair = self.data[index]
 
-        while current:
-            if current.key == key:
-                current.val = value
-                return
+        if pair:
+            while pair.key != key and pair.next:
+                pair = pair.next
 
-            current = current.next
+            if pair.key == key:
+                pair.val = value
+            else:
+                pair.next = Pair(key, value)
+                self.size += 1
+        else:
+            self.data[index] = Pair(key, value)
+            self.size += 1
 
-        new_node = Node(key, value)
-        new_node.next = self.data[key % 1000]
-        self.data[key % 1000] = new_node
+        if self.size >= self.capacity // 2:
+            self.resize()
 
     def get(self, key: int) -> int:
-        node = self.data[key % 1000]
+        index = self.hash(key)
+        pair = self.data[index]
 
-        while node.key != key and node.key != -1:
-            assert node.next
-            node = node.next
+        while pair and pair.key != key:
+            pair = pair.next
 
-        return node.val
+        return pair.val if pair else -1
 
     def remove(self, key: int) -> None:
-        dummy = Node()
-        dummy.next = self.data[key % 1000]
-        current = dummy
+        index = self.hash(key)
+        pair = self.data[index]
 
-        assert current.next
-        while current.next.key != key and current.next.key != -1:
-            current = current.next
+        # start of the chain
+        if pair and pair.key == key:
+            self.data[index] = pair.next
+            self.size -= 1
+            return
 
-        assert current.next
-        if current.next.key == key:
-            current.next = current.next.next
-            self.data[key % 1000] = dummy.next
+        # middle/end of the chain
+        while pair and pair.next:
+            if pair.next.key == key:
+                pair.next = pair.next.next
+                self.size -= 1
+                return
+            pair = pair.next
+
+    def hash(self, key: int) -> int:
+        return key % self.capacity
+
+    def resize(self) -> None:
+        self.capacity *= 2
+        old_data = self.data
+        self.data = [None] * self.capacity
+
+        for x in old_data:
+            while x:
+                self.put(x.key, x.val)
+                x = x.next
