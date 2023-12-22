@@ -8,6 +8,7 @@ from src.course_schedule import Solution
     [
         (2, [[1, 0]], True),
         (2, [[1, 0], [0, 1]], False),
+        (3, [[2, 1], [1, 0]], True),
     ],
 )
 def test_solution(num_courses, prereqs, expected):

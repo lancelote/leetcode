@@ -1,34 +1,38 @@
-from collections import defaultdict
+from functools import cache
 
 
 class Solution:
-    def canFinish(self, num_courses: int, prereqs: list[list[int]]) -> bool:
-        course_to_prereqs: dict[int, list[int]] = defaultdict(list)
+    def canFinish(
+        self, num_courses: int, prerequisites: list[list[int]]
+    ) -> bool:
+        deps: dict[int, list[int]] = {}
 
-        for course, prereq in prereqs:
-            course_to_prereqs[course].append(prereq)
+        for [a, b] in prerequisites:
+            if a not in deps:
+                deps[a] = [b]
+            else:
+                deps[a].append(b)
 
         seen: set[int] = set()
 
-        def dfs(course: int) -> bool:
-            if course in seen:
-                return False
-            if not course_to_prereqs[course]:
+        @cache
+        def has_cycles(node: int) -> bool:
+            if node in seen:
                 return True
 
-            seen.add(course)
+            seen.add(node)
 
-            for prereq in course_to_prereqs[course]:
-                if not dfs(prereq):
-                    return False
+            if node in deps:
+                for x in deps[node]:
+                    if has_cycles(x):
+                        return True
 
-            seen.remove(course)
+            seen.remove(node)
 
-            course_to_prereqs[course] = []
-            return True
+            return False
 
-        for course in range(num_courses):
-            if not dfs(course):
+        for k in deps.keys():
+            if has_cycles(k):
                 return False
 
         return True
