@@ -5,25 +5,23 @@ from src.utils.binary_tree import TreeNode
 
 class Solution:
     def rightSideView(self, root: TreeNode | None) -> list[int]:
-        if not root:
-            return []
+        result: list[int] = []
+        d: deque[TreeNode] = deque()
 
-        right_view: list[int] = []
-        queue = deque([root])
+        if root:
+            d.append(root)
 
-        while queue:
-            node: TreeNode | None = None
+        while d:
+            result.append(0)
 
-            for _ in range(len(queue)):
-                node = queue.popleft()
+            for _ in range(len(d)):
+                node = d.popleft()
+                result[-1] = node.val
 
                 if node.left:
-                    queue.append(node.left)
+                    d.append(node.left)
 
                 if node.right:
-                    queue.append(node.right)
+                    d.append(node.right)
 
-            if node:
-                right_view.append(node.val)
-
-        return right_view
+        return result
