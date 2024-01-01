@@ -1,50 +1,52 @@
 from collections import deque
 
 
-def neighbors(position: tuple[int, int, int]) -> list[tuple[int, int, int]]:
-    x, y, step = position
-    return [
-        (x + 1, y, step + 1),
-        (x - 1, y, step + 1),
-        (x, y + 1, step + 1),
-        (x, y - 1, step + 1),
-    ]
+SHIFTS = (
+    (0, -1),
+    (+1, 0),
+    (0, +1),
+    (-1, 0),
+)
 
 
 class Solution:
     def nearestExit(self, maze: list[list[str]], entrance: list[int]) -> int:
-        assert maze
+        rows = len(maze)
+        cols = len(maze[0])
 
-        height = len(maze) - 1
-        width = len(maze[0]) - 1
+        visited: set[tuple[int, int]] = set()
 
-        def in_maze(x: int, y: int) -> bool:
-            return 0 <= x <= height and 0 <= y <= width
+        start = (entrance[0], entrance[1])
+        d: deque[tuple[int, int]] = deque()
 
-        def is_exit(x: int, y: int) -> bool:
-            return x == 0 or y == 0 or x == height or y == width
+        visited.add(start)
+        d.append(start)
 
-        seen = set()
-        positions: deque[tuple[int, int, int]] = deque()
+        path = 0
 
-        start_x, start_y = entrance
+        while d:
+            for _ in range(len(d)):
+                r, c = d.popleft()
 
-        seen.add((start_x, start_y))
-        positions.append((start_x, start_y, 0))
+                if (r == 0 or r == rows - 1 or c == 0 or c == cols - 1) and (
+                    r,
+                    c,
+                ) != start:
+                    return path
 
-        while positions:
-            position = positions.popleft()
-            for neighbor in neighbors(position):
-                x, y, step = neighbor
+                for dr, dc in SHIFTS:
+                    nr = r + dr
+                    nc = c + dc
 
-                if (x, y) in seen or not in_maze(x, y):
-                    continue
+                    if (
+                        0 <= nr < rows
+                        and 0 <= nc < cols
+                        and maze[nr][nc] == "."
+                        and (nr, nc) not in visited
+                    ):
+                        d.append((nr, nc))
+                        visited.add((nr, nc))
 
-                seen.add((x, y))
-
-                if maze[x][y] == ".":
-                    if is_exit(x, y):
-                        return step
-                    positions.append(neighbor)
+            path += 1
 
         return -1
