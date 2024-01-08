@@ -17,14 +17,15 @@ class Solution:
         left, right = 0, n
 
         while left <= right:
-            middle = left + (right - left) // 2
-            attempt = guess(middle)
+            middle = (left + right) // 2
+            match guess(middle):
+                case 0:
+                    return middle
+                case -1:
+                    right = middle - 1
+                case 1:
+                    left = middle + 1
+                case _:
+                    raise ValueError("unexpected API answer")
 
-            if attempt > 0:
-                left = middle + 1
-            elif attempt < 0:
-                right = middle - 1
-            else:
-                return middle
-
-        raise ValueError("no answer found")
+        raise ValueError("answer not found")
