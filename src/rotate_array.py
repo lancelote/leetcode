@@ -1,14 +1,18 @@
-def reverse(nums: list[int], left: int, right: int) -> None:
-    while left < right:
-        nums[left], nums[right] = nums[right], nums[left]
-        left += 1
-        right -= 1
+def reverse(start: int, end: int, array: list[int]) -> None:
+    n = end - start
+
+    for i in range(n // 2):
+        left = start + i
+        right = end - i - 1
+
+        array[left], array[right] = array[right], array[left]
 
 
 class Solution:
     def rotate(self, nums: list[int], k: int) -> None:
-        """Mutates in place."""
-        k %= len(nums)
-        reverse(nums, 0, len(nums) - 1)
-        reverse(nums, 0, k - 1)
-        reverse(nums, k, len(nums) - 1)
+        n = len(nums)
+        k = k % n
+
+        reverse(0, n - k, nums)
+        reverse(n - k, n, nums)
+        reverse(0, n, nums)
