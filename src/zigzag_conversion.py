@@ -1,15 +1,34 @@
 class Solution:
     def convert(self, s: str, num_rows: int) -> str:
-        data: list[list[str]] = [[] for _ in range(num_rows)]
+        if num_rows <= 1:
+            return s
 
-        i = 0
-        shift = +1
+        result = []
 
-        for x in s:
-            data[i].append(x)
-            i = (i + shift) % num_rows
+        first, second = num_rows * 2 - 2, 0
 
-            if i == 0 or i == num_rows - 1:
-                shift *= -1
+        start = 0
+        while start < num_rows and start < len(s):
+            i = start
 
-        return "".join("".join(x) for x in data)
+            result.append(s[i])
+
+            while True:
+                i += first
+
+                if first and i < len(s):
+                    result.append(s[i])
+
+                i += second
+
+                if second and i < len(s):
+                    result.append(s[i])
+
+                if i >= len(s):
+                    break
+
+            start += 1
+            first -= 2
+            second += 2
+
+        return "".join(result)
