@@ -12,6 +12,7 @@ from src.valid_palindrome import Solution
         ("", True),
         ("aa", True),
         (".,", True),
+        ("0P", False),
     ],
 )
 def test_solution(s, expected):
