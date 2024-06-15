@@ -1,4 +1,4 @@
-from utils.linked_list import ListNode
+from src.utils.linked_list import ListNode
 
 
 class Solution:
@@ -11,6 +11,10 @@ class Solution:
         while before.next and before.next.next:
             a = before.next
             b = a.next
+
+            assert a is not None
+            assert b is not None
+
             after = b.next
 
             a.next = after
