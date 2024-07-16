@@ -7,4 +7,4 @@ class Solution:
                 return False
             max_reach = max(max_reach, i + x)
 
-        return len(nums) - 1 <= max_reach
+        return max_reach >= len(nums) - 1
