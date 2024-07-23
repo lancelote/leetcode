@@ -19,8 +19,15 @@ class Solution:
 
         quotient = 0
 
-        while dividend - divisor <= 0:
-            quotient += 1
-            dividend -= divisor
+        while divisor >= dividend:
+            power_of_two = -1
+            value = divisor
 
-        return quotient if negative_nums != 1 else -quotient
+            while value + value >= dividend:
+                value += value
+                power_of_two += power_of_two
+
+            quotient += power_of_two
+            dividend -= value
+
+        return -quotient if negative_nums != 1 else quotient
