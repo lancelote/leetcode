@@ -1,9 +1,17 @@
 class Solution:
     def hIndex(self, citations: list[int]) -> int:
-        sorted_citations = sorted(citations, reverse=True)
-        h = 0
+        n = len(citations)
 
-        for i, x in enumerate(sorted_citations, start=1):
-            h = max(h, min(i, x))
+        counts = [0] * (n + 1)
+
+        for x in citations:
+            counts[min(n, x)] += 1
+
+        h = 0
+        rest = n
+
+        for x, count in enumerate(counts):
+            h = max(h, min(x, rest))
+            rest -= count
 
         return h
