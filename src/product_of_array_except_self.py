@@ -3,16 +3,14 @@ class Solution:
         n = len(nums)
         result = [1] * n
 
-        prefix = 1
+        tmp = 1
+        for i in range(1, n):
+            tmp *= nums[i - 1]
+            result[i] *= tmp
 
-        for i, x in enumerate(nums):
-            result[i] = prefix
-            prefix *= x
-
-        postfix = 1
-
-        for i in range(n - 1, -1, -1):
-            result[i] *= postfix
-            postfix *= nums[i]
+        tmp = 1
+        for i in range(n - 2, -1, -1):
+            tmp *= nums[i + 1]
+            result[i] *= tmp
 
         return result
