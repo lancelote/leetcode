@@ -1,19 +1,22 @@
 from collections import defaultdict
-from collections.abc import Iterable
 
 
-def count(phrase: str) -> tuple[int, ...]:
-    counts: list[int] = [0] * 26
-    for char in phrase:
-        counts[ord(char) - ord("a")] += 1
+def get_count(word: str) -> tuple[int, ...]:
+    counts = [0] * 26
+
+    for letter in word:
+        index = ord(letter) - ord("a")
+        counts[index] += 1
+
     return tuple(counts)
 
 
 class Solution:
-    def groupAnagrams(self, strs: list[str]) -> Iterable[list[str]]:
-        groups: dict[tuple[int, ...], list[str]] = defaultdict(list)
+    def groupAnagrams(self, strs: list[str]) -> list[list[str]]:
+        count_to_words: dict[tuple[int, ...], list[str]] = defaultdict(list)
 
-        for phrase in strs:
-            groups[count(phrase)].append(phrase)
+        for word in strs:
+            count = get_count(word)
+            count_to_words[count].append(word)
 
-        return groups.values()
+        return list(count_to_words.values())
