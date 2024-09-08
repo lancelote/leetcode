@@ -3,7 +3,7 @@ class Solution:
         cache: dict[int, int] = {}
 
         for i, num in enumerate(nums):
-            if num in cache and abs(cache[num] - i) <= k:
+            if num in cache and i - cache[num] <= k:
                 return True
             cache[num] = i
 
