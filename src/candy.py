@@ -3,12 +3,12 @@ class Solution:
         n = len(ratings)
         result = [1] * n
 
-        for i in range(n - 1):
-            if ratings[i] < ratings[i + 1]:
-                result[i + 1] = max(1 + result[i], result[i + 1])
+        for i in range(1, n):
+            if ratings[i] > ratings[i - 1] and result[i] <= result[i - 1]:
+                result[i] = result[i - 1] + 1
 
         for i in range(n - 2, -1, -1):
-            if ratings[i + 1] < ratings[i]:
-                result[i] = max(1 + result[i + 1], result[i])
+            if ratings[i] > ratings[i + 1] and result[i] <= result[i + 1]:
+                result[i] = result[i + 1] + 1
 
         return sum(result)
