@@ -1,4 +1,4 @@
-ROMAN: dict[str, int] = {
+ROMAN_TO_INT = {
     "I": 1,
     "V": 5,
     "X": 10,
@@ -10,20 +10,17 @@ ROMAN: dict[str, int] = {
 
 
 class Solution:
-    def romanToInt(self, roman: str) -> int:
-        assert roman
+    def romanToInt(self, s: str) -> int:
+        n = len(s)
+        prev = result = ROMAN_TO_INT[s[0]]
 
-        last_int_value = ROMAN[roman[0]]
-        result = 0
+        for i in range(1, n):
+            x = ROMAN_TO_INT[s[i]]
 
-        for letter in roman:
-            int_value = ROMAN[letter]
-
-            if int_value > last_int_value:
-                result += int_value - last_int_value * 2
+            if x > prev:
+                result += x - 2 * prev
             else:
-                result += int_value
-
-            last_int_value = int_value
+                result += x
+            prev = x
 
         return result
