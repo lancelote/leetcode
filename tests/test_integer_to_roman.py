@@ -13,6 +13,7 @@ from src.integer_to_roman import Solution
         (9, "IX"),
         (58, "LVIII"),
         (1994, "MCMXCIV"),
+        (3749, "MMMDCCXLIX"),
     ],
 )
 def test_solution(num, expected):

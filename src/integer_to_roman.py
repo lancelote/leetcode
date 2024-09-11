@@ -1,21 +1,30 @@
-ROMAN_FIFTH = ["V", "L", "D"]
-ROMAN_TENS = ["I", "X", "C", "M"]
+INT_TO_ROMAN = {
+    1000: "M",
+    900: "CM",
+    500: "D",
+    400: "CD",
+    100: "C",
+    90: "XC",
+    50: "L",
+    40: "XL",
+    10: "X",
+    9: "IX",
+    5: "V",
+    4: "IV",
+    1: "I",
+}
+
+INTEGERS = sorted(INT_TO_ROMAN.keys(), reverse=True)
 
 
 class Solution:
     def intToRoman(self, num: int) -> str:
-        result = []
+        result: list[str] = []
 
-        for i, x in enumerate(str(num)[::-1]):
-            digit = int(x)
+        while num:
+            for integer in INTEGERS:
+                while num >= integer:
+                    result.append(INT_TO_ROMAN[integer])
+                    num -= integer
 
-            if digit == 4:
-                result.append(f"{ROMAN_TENS[i]}{ROMAN_FIFTH[i]}")
-            elif digit == 9:
-                result.append(f"{ROMAN_TENS[i]}{ROMAN_TENS[i + 1]}")
-            elif digit < 4:
-                result.append(ROMAN_TENS[i] * digit)
-            else:
-                result.append(ROMAN_FIFTH[i] + ROMAN_TENS[i] * (digit - 5))
-
-        return "".join(result[::-1])
+        return "".join(result)
