@@ -8,6 +8,7 @@ from src.longest_common_prefix import Solution
     [
         (["flower", "flow", "flight"], "fl"),
         (["dog", "racecar", "car"], ""),
+        (["a"], "a"),
     ],
 )
 def test_solution(strings, expected_prefix):
