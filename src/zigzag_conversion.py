@@ -1,34 +1,28 @@
 class Solution:
     def convert(self, s: str, num_rows: int) -> str:
-        if num_rows <= 1:
+        if num_rows == 1:
             return s
 
-        result = []
+        n = len(s)
+        result: list[str] = []
 
-        first, second = num_rows * 2 - 2, 0
+        step = (num_rows - 1) * 2
 
-        start = 0
-        while start < num_rows and start < len(s):
-            i = start
-
+        # first row
+        for i in range(0, n, step):
             result.append(s[i])
 
-            while True:
-                i += first
+        # middle rows
+        for r in range(1, num_rows - 1):
+            for i in range(r, n, step):
+                result.append(s[i])
 
-                if first and i < len(s):
-                    result.append(s[i])
+                j = i + (step - r * 2)
+                if j < n:
+                    result.append(s[j])
 
-                i += second
-
-                if second and i < len(s):
-                    result.append(s[i])
-
-                if i >= len(s):
-                    break
-
-            start += 1
-            first -= 2
-            second += 2
+        # last row
+        for i in range(num_rows - 1, n, step):
+            result.append(s[i])
 
         return "".join(result)
