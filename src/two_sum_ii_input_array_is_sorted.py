@@ -3,13 +3,11 @@ class Solution:
         left, right = 0, len(numbers) - 1
 
         while left < right:
-            current_sum = numbers[left] + numbers[right]
-
-            if current_sum == target:
+            if numbers[left] + numbers[right] == target:
                 return [left + 1, right + 1]
-            elif current_sum > target:
-                right -= 1
-            else:
+            elif numbers[left] + numbers[right] < target:
                 left += 1
+            else:
+                right -= 1
 
-        raise ValueError("no answer found")
+        raise ValueError("solution not found")
