@@ -2,34 +2,34 @@ class Solution:
     def findSubstring(self, s: str, words: list[str]) -> list[int]:
         n = len(s)
         m = len(words[0])
-        substring_length = m * len(words)
 
-        result: list[int] = []
+        left = 0
+        right = 0
+
+        result = []
+
         words_bank: dict[str, int] = {}
-
         for word in words:
             words_bank[word] = words_bank.get(word, 0) + 1
+        original_word_bank = words_bank.copy()
 
-        def dfs(start: int = 0) -> bool:
+        while right < n - m + 1:
+            right_substring = s[right : right + m]
+
+            if right_substring in words_bank:
+                words_bank[right_substring] -= 1
+                if words_bank[right_substring] == 0:
+                    del words_bank[right_substring]
+                right += m
+            else:
+                left += 1
+                right = left
+                words_bank = original_word_bank.copy()
+
             if not words_bank:
-                return True
-
-            substring = s[start : start + m]
-
-            if substring in words_bank:
-                words_bank[substring] -= 1
-                if words_bank[substring] == 0:
-                    del words_bank[substring]
-
-                success = dfs(start + m)
-
-                words_bank[substring] = words_bank.get(substring, 0) + 1
-                return success
-
-            return False
-
-        for i in range(n - substring_length + 1):
-            if dfs(i):
-                result.append(i)
+                result.append(left)
+                left += 1
+                right = left
+                words_bank = original_word_bank.copy()
 
         return result
