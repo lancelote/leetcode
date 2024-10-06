@@ -1,41 +1,44 @@
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
-        if t == "":
-            return ""
+        result: tuple[int, int] = (0, -1)
+        result_len = len(s) + 1
+
+        t_char_count: dict[str, int] = {}
+        for x in t:
+            t_char_count[x] = t_char_count.get(x, 0) + 1
 
         window: dict[str, int] = {}
-        t_counts: dict[str, int] = {}
-        for char in t:
-            t_counts[char] = t_counts.get(char, 0) + 1
 
         have = 0
-        need = len(t_counts)
+        need = len(t_char_count)
+
         left_i = 0
-        result = (-1, -1)
-        result_len = float("infinity")
+        while left_i < len(s) and s[left_i] not in t_char_count:
+            left_i += 1
 
-        for right_i, right_char in enumerate(s):
-            window[right_char] = window.get(right_char, 0) + 1
+        for right_i in range(left_i, len(s)):
+            right = s[right_i]
 
-            if (
-                right_char in t_counts
-                and window[right_char] == t_counts[right_char]
-            ):
-                have += 1
+            if right in t_char_count:
+                window[right] = window.get(right, 0) + 1
+
+                if window[right] == t_char_count[right]:
+                    have += 1
 
             while have == need:
-                if (window_size := right_i - left_i + 1) < result_len:
+                if (length := right_i - left_i + 1) < result_len:
+                    result_len = length
                     result = (left_i, right_i)
-                    result_len = window_size
 
-                left_char = s[left_i]
-                window[left_char] -= 1
-                if (
-                    left_char in t_counts
-                    and window[left_char] < t_counts[left_char]
-                ):
-                    have -= 1
+                left = s[left_i]
+
+                if left in t_char_count:
+                    window[left] -= 1
+
+                    if window[left] < t_char_count[left]:
+                        have -= 1
+
                 left_i += 1
 
-        left, right = result
-        return s[left : right + 1]
+        left_i, right_i = result
+        return s[left_i : right_i + 1]
