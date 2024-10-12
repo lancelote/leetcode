@@ -3,21 +3,6 @@ import pytest
 from src.rotate_image import Solution
 
 
-def test_reverse():
-    matrix = [
-        [1, 2, 3],
-        [4, 5, 6],
-        [7, 8, 9],
-    ]
-    expected = [
-        [3, 2, 1],
-        [6, 5, 4],
-        [9, 8, 7],
-    ]
-    Solution().reverse(matrix)
-    assert matrix == expected
-
-
 @pytest.mark.parametrize(
     "matrix,expected_matrix",
     [
