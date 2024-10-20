@@ -9,15 +9,16 @@ class Solution:
                 b = stack.pop()
                 a = stack.pop()
 
-                if token == "+":
-                    stack.append(a + b)
-                elif token == "-":
-                    stack.append(a - b)
-                elif token == "*":
-                    stack.append(a * b)
-                elif token == "/":
-                    stack.append(int(a / b))
-                else:
-                    raise ValueError(f"unknown token: {token}")
+                match token:
+                    case "+":
+                        stack.append(a + b)
+                    case "-":
+                        stack.append(a - b)
+                    case "*":
+                        stack.append(a * b)
+                    case "/":
+                        stack.append(int(a / b))
+                    case _:
+                        raise ValueError(f"unknown token: {token}")
 
-        return stack[-1]
+        return stack[0]
