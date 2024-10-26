@@ -5,22 +5,29 @@ class Solution:
     def mergeTwoLists(
         self, l1: ListNode | None, l2: ListNode | None
     ) -> ListNode | None:
-        dummy = ListNode()
-        tail = dummy
+        dummy = current = ListNode()
 
         while l1 and l2:
-            if l1.val > l2.val:
-                tail.next = l2
-                l2 = l2.next
-            else:
-                tail.next = l1
+            if l1.val < l2.val:
+                node = ListNode(l1.val)
                 l1 = l1.next
-            tail = tail.next
+            else:
+                node = ListNode(l2.val)
+                l2 = l2.next
 
-        if l1:
-            tail.next = l1
+            current.next = node
+            current = node
 
-        if l2:
-            tail.next = l2
+        while l1:
+            node = ListNode(l1.val)
+            current.next = node
+            current = node
+            l1 = l1.next
+
+        while l2:
+            node = ListNode(l2.val)
+            current.next = node
+            current = node
+            l2 = l2.next
 
         return dummy.next
