@@ -1,11 +1,12 @@
-from src.utils.linked_list import ListNode
+from utils.linked_list import ListNode
 
 
 class Solution:
     def hasCycle(self, head: ListNode | None) -> bool:
-        slow = fast = head
+        slow = head
+        fast = head
 
-        while slow and fast and fast.next and fast.next.next:
+        while slow and fast and fast.next:
             slow = slow.next
             fast = fast.next.next
 
