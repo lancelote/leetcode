@@ -1,4 +1,4 @@
-from utils.linked_list import ListNode
+from src.utils.linked_list import ListNode
 
 
 class Solution:
