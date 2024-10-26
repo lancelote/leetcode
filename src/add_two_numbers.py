@@ -1,42 +1,32 @@
-from __future__ import annotations
-
-
-class ListNode:
-    def __init__(self, val: int = 0, next: ListNode | None = None) -> None:
-        self.val = val
-        self.next = next
-
-
-def list_to_int(lst: ListNode | None) -> int:
-    stack: list[str] = []
-
-    while lst:
-        stack.append(str(lst.val))
-        lst = lst.next
-
-    return int("".join(stack)[::-1])
-
-
-def int_to_list(num: int) -> ListNode:
-    dummy = ListNode(-1)
-    current = dummy
-
-    for val in (int(x) for x in str(num)[::-1]):
-        node = ListNode(val)
-
-        assert current
-        current.next = node
-        current = current.next
-
-    assert dummy.next
-    return dummy.next
+from src.utils.linked_list import ListNode
 
 
 class Solution:
     def addTwoNumbers(
         self, l1: ListNode | None, l2: ListNode | None
     ) -> ListNode | None:
-        n1 = list_to_int(l1)
-        n2 = list_to_int(l2)
+        dummy = current = ListNode()
 
-        return int_to_list(n1 + n2)
+        carry = 0
+        while l1 or l2 or carry:
+            if l1 and l2:
+                new_val = l1.val + l2.val + carry
+                l1 = l1.next
+                l2 = l2.next
+            elif l1:
+                new_val = l1.val + carry
+                l1 = l1.next
+            elif l2:
+                new_val = l2.val + carry
+                l2 = l2.next
+            else:
+                new_val = carry
+
+            carry = new_val // 10
+            new_val %= 10
+
+            new_node = ListNode(new_val)
+            current.next = new_node
+            current = new_node
+
+        return dummy.next
