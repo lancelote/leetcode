@@ -1,53 +1,44 @@
-from __future__ import annotations
+from src.utils.linked_list import ListNode
 
 
-class ListNode:
-    def __init__(self, val: int = 0, next: ListNode | None = None) -> None:
-        self.val = val
-        self.next = next
+def get_len(head: ListNode | None) -> int:
+    result = 0
 
-    def __repr__(self) -> str:
-        return f"ListNode({self.val})"
+    while head:
+        result += 1
+        head = head.next
+
+    return result
 
 
 class Solution:
-    def get_length(self, node: ListNode | None) -> int:
-        if node is None:
-            return 0
-
-        length = 0
-
-        while node is not None:
-            length += 1
-            node = node.next
-
-        return length
-
     def reverseKGroup(self, head: ListNode | None, k: int) -> ListNode | None:
-        length = self.get_length(head)
-        times = length // k
+        if k == 1:
+            return head
 
-        dummy = ListNode(-1, next=head)
-        section_prev = dummy
+        dummy = ListNode(next=head)
+        n = get_len(head)
 
-        prev = dummy
-        curr = dummy.next
+        last_end = dummy
+        left = dummy.next
+        assert left
+        right = left.next
 
-        for _ in range(times):
-            for _ in range(k):
-                assert curr
+        for _ in range(n // k):
+            for _ in range(k - 1):
+                assert right
+                tmp = right.next
+                right.next = left
+                left = right
+                right = tmp
 
-                tmp = curr
-                curr = curr.next
-                tmp.next = prev
-                prev = tmp
+            tmp = last_end.next
+            last_end.next = left
+            assert tmp
+            last_end = tmp
+            last_end.next = right
 
-            assert section_prev.next
-
-            tmp = section_prev
-            section_prev = section_prev.next
-            tmp.next = prev
-            section_prev.next = curr
-            prev = section_prev
+            left = right
+            right = right.next if right else None
 
         return dummy.next

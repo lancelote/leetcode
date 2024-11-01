@@ -10,6 +10,7 @@ from src.utils.linked_list import to_list
     [
         ([1, 2, 3, 4, 5], 2, [2, 1, 4, 3, 5]),
         ([1, 2, 3, 4, 5], 3, [3, 2, 1, 4, 5]),
+        ([1, 2], 2, [2, 1]),
     ],
 )
 def test_solution(in_list, k, out_list):
