@@ -3,20 +3,24 @@ from src.utils.linked_list import ListNode
 
 class Solution:
     def reverseBetween(
-        self, head: ListNode | None, left: int, right: int
+        self,
+        head: ListNode | None,
+        left: int,
+        right: int,
     ) -> ListNode | None:
-        dummy = ListNode(-1, next=head)
-        last = dummy
+        dummy = prev = ListNode(-1, next=head)
 
+        # skip left
         for _ in range(left - 1):
-            assert last and last.next
-            last = last.next
+            assert prev and prev.next
+            prev = prev.next
 
-        start = last.next
-        prev = start
-        assert prev
+        assert prev.next
+        start = prev
+        prev = prev.next
         current = prev.next
 
+        # revert till right
         for _ in range(right - left):
             assert current
             tmp = current.next
@@ -24,8 +28,10 @@ class Solution:
             prev = current
             current = tmp
 
-        last.next = prev
-        assert start
-        start.next = current
+        end = current
+        tmp = start.next
+        start.next = prev
+        assert tmp
+        tmp.next = end
 
         return dummy.next
