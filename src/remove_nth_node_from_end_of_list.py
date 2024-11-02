@@ -6,15 +6,19 @@ class Solution:
         self, head: ListNode | None, n: int
     ) -> ListNode | None:
         dummy = ListNode(next=head)
-        slow, fast = dummy, dummy
+        slow = fast = dummy
 
         for _ in range(n):
             assert fast.next
+
             fast = fast.next
 
         while fast.next:
-            slow = slow.next  # type: ignore
-            fast = fast.next
+            assert fast.next and slow.next
 
-        slow.next = slow.next.next  # type: ignore
+            fast = fast.next
+            slow = slow.next
+
+        assert slow.next
+        slow.next = slow.next.next
         return dummy.next
