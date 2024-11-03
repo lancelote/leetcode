@@ -1,20 +1,16 @@
 from src.utils.binary_tree import TreeNode
 
 
+def dfs(node: TreeNode | None, depth: int = 0) -> int:
+    if node is None:
+        return depth
+
+    left = dfs(node.left, depth + 1)
+    right = dfs(node.right, depth + 1)
+
+    return max(left, right)
+
+
 class Solution:
     def maxDepth(self, root: TreeNode | None) -> int:
-        def dfs(head: TreeNode | None, depth: int) -> int:
-            if not head:
-                return depth
-            elif head.left and head.right:
-                return max(
-                    dfs(head.left, depth + 1), dfs(head.right, depth + 1)
-                )
-            elif head.left:
-                return dfs(head.left, depth + 1)
-            elif head.right:
-                return dfs(head.right, depth + 1)
-            else:
-                return depth + 1
-
-        return dfs(root, 0)
+        return dfs(root)
