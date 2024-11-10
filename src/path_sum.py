@@ -3,15 +3,15 @@ from src.utils.binary_tree import TreeNode
 
 class Solution:
     def hasPathSum(self, root: TreeNode | None, target_sum: int) -> bool:
-        def dfs(node: TreeNode | None, current_sum: int) -> bool:
+        def dfs(node: TreeNode | None, total: int = 0) -> bool:
             if not node:
                 return False
 
-            current_sum += node.val
+            total += node.val
 
             if not node.left and not node.right:
-                return current_sum == target_sum
+                return total == target_sum
 
-            return dfs(node.left, current_sum) or dfs(node.right, current_sum)
+            return dfs(node.left, total) or dfs(node.right, total)
 
-        return dfs(root, 0)
+        return dfs(root)
