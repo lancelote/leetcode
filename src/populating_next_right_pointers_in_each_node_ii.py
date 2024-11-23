@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from collections import deque
-
 
 class Node:
     def __init__(
@@ -18,21 +16,32 @@ class Node:
 
 
 class Solution:
+    def process_child(
+        self, child: Node | None, prev: Node | None, leftmost: Node | None
+    ) -> tuple[Node | None, Node | None]:
+        if child:
+            if prev:
+                prev.next = child
+            else:
+                leftmost = child
+            prev = child
+        return prev, leftmost
+
     def connect(self, root: Node | None) -> Node | None:
         if not root:
             return None
 
-        queue: deque[Node] = deque()
-        queue.append(root)
+        leftmost: Node | None = root
 
-        while queue:
-            for i in range(len(queue) - 1):
-                queue[i].next = queue[i + 1]
-            for _ in range(len(queue)):
-                node = queue.popleft()
-                if node.left:
-                    queue.append(node.left)
-                if node.right:
-                    queue.append(node.right)
+        while leftmost:
+            prev = None
+            curr: Node | None = leftmost
+            leftmost = None
+
+            while curr:
+                prev, leftmost = self.process_child(curr.left, prev, leftmost)
+                prev, leftmost = self.process_child(curr.right, prev, leftmost)
+
+                curr = curr.next
 
         return root
