@@ -14,15 +14,21 @@ jobs:
           fetch-depth: 0
 
       - name: prepare
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: ">=3.13.0"
+          python-version: ">=3.13"
 
-      - name: install
-        run: pip install -r requirements.txt
+      - name: install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+
+      - name: install project dependencies
+        run: uv sync --all-extras --dev
 
       - name: test
-        run: PYTHONPATH=. pytest
+        run: PYTHONPATH=. uv run pytest
 
       - name: lint
-        run: pre-commit run --all-files
+        run: uv run pre-commit run --all-files

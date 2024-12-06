@@ -1,24 +1,21 @@
-[tool.black]
-line-length = 79
-target-version = ['py312']
-exclude = '''
-/(
-    \.eggs
-  | \.git
-  | \.hg
-  | \.mypy_cache
-  | \.tox
-  | \.venv
-  | \.idea
-  | _build
-  | buck-out
-  | build
-  | dist
-)/
-'''
+[project]
+name = "leetcode"
+version = "0.1.0"
+description = "My Leetcode exercise solutions"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "black==24.10.0",
+    "click==8.1.7",
+    "mypy==1.13.0",
+    "pre-commit==4.0.1",
+    "pur==7.3.2",
+    "pytest==8.3.3",
+    "ruff==0.7.2",
+]
 
 [tool.mypy]
-python_version = "3.12"
+python_version = "3.13"
 warn_return_any = true
 warn_unused_configs = true
 exclude = [
@@ -36,4 +33,4 @@ exclude = [
     ".venv"
 ]
 line-length = 80
-target-version = "py312"
+target-version = "py313"
