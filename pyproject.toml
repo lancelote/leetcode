@@ -5,7 +5,6 @@ description = "My Leetcode exercise solutions"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "black==25.1.0",
     "click==8.1.7",
     "mypy==1.13.0",
     "pre-commit==4.0.1",
