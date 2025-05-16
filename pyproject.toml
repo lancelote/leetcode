@@ -5,7 +5,7 @@ description = "My Leetcode exercise solutions"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "click==8.1.7",
+    "click==8.2.0",
     "mypy==1.13.0",
     "pre-commit==4.0.1",
     "pur==7.3.2",
