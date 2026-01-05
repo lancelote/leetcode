@@ -11,6 +11,4 @@ from src.longest_unequal_adjacent_groups_subsequence_i import Solution
     ),
 )
 def test_solution(n, words, groups, expected):
-    assert (
-        Solution().getWordsInLongestSubsequence(n, words, groups) == expected
-    )
+    assert Solution().getWordsInLongestSubsequence(n, words, groups) == expected

@@ -15,4 +15,4 @@ class Solution:
 
         stronger_pairs = [(x, i) for i, x in enumerate(stronger)]
 
-        return [i for _, i, in sorted(stronger_pairs)][:k]
+        return [i for _, i in sorted(stronger_pairs)][:k]

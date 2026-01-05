@@ -11,7 +11,6 @@ class Solution:
         layers = math.ceil(min(rows, cols) / 2)
 
         for layer in range(layers):
-
             # left to right
             for c in range(layer, cols - layer):
                 result.append(matrix[layer][c])

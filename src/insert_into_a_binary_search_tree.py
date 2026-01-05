@@ -2,9 +2,7 @@ from src.utils.binary_tree import TreeNode
 
 
 class Solution:
-    def insertIntoBST(
-        self, root: TreeNode | None, val: int
-    ) -> TreeNode | None:
+    def insertIntoBST(self, root: TreeNode | None, val: int) -> TreeNode | None:
         if not root:
             return TreeNode(val)
 

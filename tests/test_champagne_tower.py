@@ -13,6 +13,4 @@ from src.champagne_tower import Solution
     ),
 )
 def test_solution(poured, query_row, query_glass, expected):
-    assert (
-        Solution().champagneTower(poured, query_row, query_glass) == expected
-    )
+    assert Solution().champagneTower(poured, query_row, query_glass) == expected

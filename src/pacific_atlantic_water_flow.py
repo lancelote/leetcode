@@ -17,9 +17,7 @@ class Solution:
         pacific: set[tuple[int, int]] = set()
         atlantic: set[tuple[int, int]] = set()
 
-        def dfs(
-            r: int, c: int, ocean: set[tuple[int, int]], prev: int
-        ) -> None:
+        def dfs(r: int, c: int, ocean: set[tuple[int, int]], prev: int) -> None:
             if (r, c) in ocean:
                 return
             if r < 0 or r == rows or c < 0 or c == cols:
