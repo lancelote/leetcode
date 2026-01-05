@@ -1,32 +1,19 @@
 [project]
 name = "leetcode"
 version = "0.1.0"
-description = "My Leetcode exercise solutions"
+description = "My Leetcode exercise solutions in Python"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
-    "click==8.2.1",
-    "mypy==1.16.0",
-    "pre-commit==4.0.1",
-    "pur==7.3.2",
-    "pytest==8.3.3",
-    "ruff==0.11.13",
+    "click==8.3.1",
+    "pytest==9.0.2",
+    "ruff==0.14.10",
+    "ty==0.0.9",
 ]
-
-[tool.mypy]
-python_version = "3.13"
-warn_return_any = true
-warn_unused_configs = true
-exclude = [
-    'tests/',
-    '.venv/'
-]
-strict = true
 
 [tool.ruff]
 exclude = [
     ".git",
-    ".mypy_cache",
     ".pytest_cache",
     ".ruff_cache",
     ".venv"
