@@ -1,21 +1,39 @@
-import math
+def get_abs_sum(matrix: list[list[int]]) -> int:
+    total = 0
+
+    for row in matrix:
+        for x in row:
+            total += abs(x)
+
+    return total
+
+
+def get_min_abs_el(matrix: list[list[int]]) -> int:
+    result = abs(matrix[0][0])
+
+    for row in matrix:
+        for x in row:
+            abs_x = abs(x)
+            result = min(result, abs_x)
+
+    return result
 
 
 class Solution:
     def maxMatrixSum(self, matrix: list[list[int]]) -> int:
-        total_absolute = 0
-        negative_count = 0
-        smallest_abs = math.inf
+        abs_sum = get_abs_sum(matrix)
+        min_abs_el = get_min_abs_el(matrix)
+
+        count_neg = 0
 
         for row in matrix:
-            for num in row:
-                total_absolute += abs(num)
-                smallest_abs = min(abs(num), smallest_abs)
+            for x in row:
+                if x == 0:
+                    return abs_sum
+                elif x < 0:
+                    count_neg += 1
 
-                if num < 0:
-                    negative_count += 1
-
-        if negative_count % 2 == 0:
-            return int(total_absolute)
+        if count_neg % 2 == 0:
+            return abs_sum
         else:
-            return int(total_absolute - 2 * smallest_abs)
+            return abs_sum - 2 * min_abs_el
