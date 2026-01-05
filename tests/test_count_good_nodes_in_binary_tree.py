@@ -13,4 +13,7 @@ from src.utils.binary_tree import list_to_tree
     ],
 )
 def test_solution(in_list, expected_good):
-    assert Solution().goodNodes(list_to_tree(in_list)) == expected_good
+    head = list_to_tree(in_list)
+
+    assert head is not None
+    assert Solution().goodNodes(head) == expected_good

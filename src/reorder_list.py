@@ -9,8 +9,10 @@ class Solution:
         fast = head.next
 
         while fast and fast.next:
-            slow = slow.next  # type: ignore
+            slow = slow.next
             fast = fast.next.next
+
+        assert slow
 
         # reverse
         second = slow.next
@@ -34,5 +36,5 @@ class Solution:
             first.next = second
             second.next = tmp1
 
-            first = tmp1  # type: ignore
+            first = tmp1
             second = tmp2

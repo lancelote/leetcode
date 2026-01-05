@@ -8,7 +8,9 @@ class Solution:
         slow = fast = dummy
 
         while slow and fast and fast.next and fast.next.next:
-            slow = slow.next  # type: ignore
+            assert slow.next
+
+            slow = slow.next
             fast = fast.next.next
 
         if slow.next:

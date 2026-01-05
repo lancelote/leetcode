@@ -14,4 +14,6 @@ from src.utils.binary_tree import list_to_tree
 )
 def test_solution(in_list, expected_output):
     root = list_to_tree(in_list)
+
+    assert root is not None
     assert Solution().tree2str(root) == expected_output

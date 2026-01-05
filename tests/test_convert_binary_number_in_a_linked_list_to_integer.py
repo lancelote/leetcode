@@ -17,4 +17,7 @@ from src.utils.linked_list import to_linked_list
     ],
 )
 def test_solution(items, num):
-    assert Solution().getDecimalValue(to_linked_list(items)) == num
+    head = to_linked_list(items)
+
+    assert head is not None
+    assert Solution().getDecimalValue(head) == num

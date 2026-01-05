@@ -1,8 +1,4 @@
-class TreeNode:
-    def __init__(self, x: int) -> None:
-        self.val = x
-        self.left: TreeNode | None = None
-        self.right: TreeNode | None = None
+from src.utils.binary_tree import TreeNode
 
 
 class Solution:

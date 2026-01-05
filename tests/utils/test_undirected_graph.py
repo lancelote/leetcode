@@ -7,6 +7,9 @@ def test_from_adj_list():
     adj_list = [[2, 4], [1, 3], [2, 4], [1, 3]]
 
     node1 = list_to_node(adj_list)
+
+    assert node1 is not None
+
     node2, node4 = node1.neighbors
     _, node3 = node2.neighbors
 

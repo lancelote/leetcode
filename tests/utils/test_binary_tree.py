@@ -49,11 +49,21 @@ class TestListToTree:
         lst = [3, 4, 5, 1, 2]
         tree = list_to_tree(lst)
 
+        assert tree is not None
         assert tree.val == 3
+
+        assert tree.left is not None
         assert tree.left.val == 4
+
+        assert tree.right is not None
         assert tree.right.val == 5
+
+        assert tree.left.left is not None
         assert tree.left.left.val == 1
+
+        assert tree.left.right is not None
         assert tree.left.right.val == 2
+
         assert tree.right.left is None
         assert tree.right.right is None
 

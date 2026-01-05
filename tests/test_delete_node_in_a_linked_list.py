@@ -6,8 +6,8 @@ from src.utils.linked_list import to_linked_list
 from src.utils.linked_list import to_list
 
 
-def find_by_value(node: ListNode, val: int) -> ListNode | None:
-    while node and node.val != val:
+def find_by_value(node: ListNode | None, val: int) -> ListNode | None:
+    while node is not None and node.val != val:
         node = node.next
     return node
 

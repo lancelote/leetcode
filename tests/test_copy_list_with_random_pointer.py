@@ -10,6 +10,8 @@ def to_list(in_data: list[list[int | None]]) -> Node | None:
 
     # construct the list without random
     for val, _ in in_data:
+        assert val is not None
+
         node = Node(val)
         current.next = node
         current = current.next
@@ -32,7 +34,11 @@ def to_list(in_data: list[list[int | None]]) -> Node | None:
 
     while current:
         _, random = in_data[i]
-        current.random = int_to_node.get(random, None)
+
+        if random is None:
+            current.random = None
+        else:
+            current.random = int_to_node.get(random, None)
 
         i += 1
         current = current.next
@@ -54,12 +60,16 @@ def to_data(out_list: Node) -> list[list[int | None]]:
         current = current.next
 
     # construct out data with random
-    out_data: list[list[int, None]] = []
+    out_data: list[list[int | None]] = []
 
     current = out_list
     while current:
-        out_data.append([current.val, node_to_int.get(current.random, None)])
+        if current.random is None:
+            right = None
+        else:
+            right = node_to_int.get(current.random, None)
 
+        out_data.append([current.val, right])
         current = current.next
 
     return out_data
@@ -79,4 +89,6 @@ def to_data(out_list: Node) -> list[list[int | None]]:
 def test_1(in_data, out_data):
     in_list = to_list(in_data)
     out_list = Solution().copyRandomList(in_list)
+
+    assert out_list is not None
     assert to_data(out_list) == out_data

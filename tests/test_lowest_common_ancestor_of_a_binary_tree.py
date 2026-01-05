@@ -18,4 +18,9 @@ def test_solution(in_list, p_val, q_val, expected_val):
     p = TreeNode(p_val)
     q = TreeNode(q_val)
 
-    assert Solution().lowestCommonAncestor(root, p, q).val == expected_val
+    assert root is not None
+
+    result = Solution().lowestCommonAncestor(root, p, q)
+
+    assert result is not None
+    assert result.val == expected_val
