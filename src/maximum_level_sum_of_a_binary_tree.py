@@ -1,4 +1,3 @@
-import sys
 from collections import deque
 
 from src.utils.binary_tree import TreeNode
@@ -6,31 +5,32 @@ from src.utils.binary_tree import TreeNode
 
 class Solution:
     def maxLevelSum(self, root: TreeNode | None) -> int:
-        max_total = -sys.maxsize
-        max_level = 1
+        if root is None:
+            raise ValueError("root is None")
 
-        level = 1
+        max_level_n = 1
+        max_sum = root.val
 
-        d: deque[TreeNode] = deque()
-        if root:
-            d.append(root)
+        level_n = 1
+        to_visit: deque[TreeNode] = deque([root])
 
-        while d:
+        while to_visit:
             level_sum = 0
 
-            for _ in range(len(d)):
-                node = d.popleft()
+            for _ in range(len(to_visit)):
+                node = to_visit.popleft()
                 level_sum += node.val
 
-                if node.left:
-                    d.append(node.left)
-                if node.right:
-                    d.append(node.right)
+                if node.left is not None:
+                    to_visit.append(node.left)
 
-            if level_sum > max_total:
-                max_total = level_sum
-                max_level = level
+                if node.right is not None:
+                    to_visit.append(node.right)
 
-            level += 1
+            if level_sum > max_sum:
+                max_sum = level_sum
+                max_level_n = level_n
 
-        return max_level
+            level_n += 1
+
+        return max_level_n
