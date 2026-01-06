@@ -48,13 +48,18 @@ def tree_to_list(root: TreeNode | None) -> list[int | None]:
     return result
 
 
-def list_to_tree(lst: list[int]) -> TreeNode | None:
+def list_to_tree(lst: list[int | None]) -> TreeNode | None:
     if not lst:
         return None
 
     items = iter(lst)
     to_visit: typing.Deque[TreeNode | None] = deque()
-    head = TreeNode(next(items))
+
+    head_val = next(items)
+    if head_val is None:
+        return None
+    head = TreeNode(head_val)
+
     to_visit.append(head)
 
     while to_visit:

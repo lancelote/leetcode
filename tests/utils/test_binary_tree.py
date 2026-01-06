@@ -8,7 +8,7 @@ from src.utils.binary_tree import TreeNode
 
 @pytest.mark.parametrize(
     "tree,expected_list",
-    [
+    (
         (None, []),
         (TreeNode(1, left=None, right=TreeNode(2)), [1, None, 2]),
         (
@@ -20,7 +20,7 @@ from src.utils.binary_tree import TreeNode
             [3, 4, 5, 1, 2, None, None, None, None, 0],
         ),
         (TreeNode(1, TreeNode(2)), [1, 2]),
-    ],
+    ),
 )
 def test_tree_to_list(tree, expected_list):
     assert tree_to_list(tree) == expected_list
@@ -28,7 +28,7 @@ def test_tree_to_list(tree, expected_list):
 
 @pytest.mark.parametrize(
     "in_list,out_list",
-    [
+    (
         ([], []),
         ([1], [1]),
         ([1, 2], [1, 2]),
@@ -37,7 +37,8 @@ def test_tree_to_list(tree, expected_list):
             [3, 4, 5, 1, 2, None, None, None, None, 0],
             [3, 4, 5, 1, 2, None, None, None, None, 0],
         ),
-    ],
+        ([None, 1, 2, 3], []),
+    ),
 )
 def test_list_to_tree(in_list, out_list):
     out_tree = list_to_tree(in_list)
