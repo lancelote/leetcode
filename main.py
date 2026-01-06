@@ -1,3 +1,4 @@
+import sys
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -14,7 +15,7 @@ def cli(problem: str) -> None:
 def exists(path: Path) -> None:
     if path.exists():
         print(f"{path} already exists")
-        exit(1)
+        sys.exit(1)
 
 
 def parse_slug(problem: str) -> str:

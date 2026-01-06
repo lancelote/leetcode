@@ -106,7 +106,6 @@ ignore = [
     "PERF403",
     "RET506",
     "T201",
-    "PLR1722",
 ]
 
 [tool.ruff.lint.isort]
