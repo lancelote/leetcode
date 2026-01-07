@@ -1,8 +1,12 @@
+import logging
 import sys
 from pathlib import Path
 from urllib.parse import urlparse
 
 import click
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO)
 
 
 @click.command()
@@ -14,7 +18,7 @@ def cli(problem: str) -> None:
 
 def exists(path: Path) -> None:
     if path.exists():
-        print(f"{path} already exists")
+        logger.error("%s already exists", path)
         sys.exit(1)
 
 
@@ -44,8 +48,8 @@ def create_templates(name: str) -> None:
     src_file.open("w").close()
     test_file.open("w").close()
 
-    print(f"touch {src_file}")
-    print(f"touch {test_file}")
+    logger.info("touch %s", src_file)
+    logger.info("touch %s", test_file)
 
 
 if __name__ == "__main__":
