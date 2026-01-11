@@ -14,8 +14,8 @@ class Solution:
 
             if abs(left - right) > 1:
                 raise ValueError
-            else:
-                return max(left, right)
+
+            return max(left, right)
 
         try:
             get_depth(root, 0)
