@@ -1,10 +1,14 @@
 class Solution:
-    @staticmethod
-    def sec_between(a: list[int], b: list[int]) -> int:
-        return max(abs(a[0] - b[0]), abs(a[1] - b[1]))
-
     def minTimeToVisitAllPoints(self, points: list[list[int]]) -> int:
-        return sum(
-            self.sec_between(points[i], points[i + 1])
-            for i in range(0, len(points) - 1)
-        )
+        distance = 0
+
+        for i in range(len(points) - 1):
+            x1, y1 = points[i]
+            x2, y2 = points[i + 1]
+
+            dx = max(x1, x2) - min(x1, x2)
+            dy = max(y1, y2) - min(y1, y2)
+
+            distance += max(dx, dy)
+
+        return distance
