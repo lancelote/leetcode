@@ -24,9 +24,6 @@ class Solution:
 
             return node
 
-        val_to_index: dict[int, int] = {}
-
-        for i, val in enumerate(inorder):
-            val_to_index[val] = i
+        val_to_index = {val: i for i, val in enumerate(inorder)}
 
         return dfs(0, len(preorder) - 1)

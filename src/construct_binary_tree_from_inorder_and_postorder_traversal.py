@@ -25,8 +25,6 @@ class Solution:
 
             return node
 
-        val_to_inorder_idx: dict[int, int] = {}
-        for idx, val in enumerate(inorder):
-            val_to_inorder_idx[val] = idx
+        val_to_inorder_idx = {val: i for i, val in enumerate(inorder)}
 
         return dfs(0, n - 1)
