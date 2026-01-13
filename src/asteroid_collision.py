@@ -10,7 +10,8 @@ class Solution:
                     if x > 0:
                         stack.append(x)
                         break
-                    elif x < 0 < stack[-1]:
+
+                    if x < 0 < stack[-1]:
                         if abs(stack[-1]) < abs(x):
                             stack.pop()
                         elif abs(stack[-1]) == abs(x):
