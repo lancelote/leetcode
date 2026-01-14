@@ -12,4 +12,6 @@ from src.separate_squares_i import Solution
     ),
 )
 def test_solution(squares, expected):
-    assert Solution().separateSquares(squares) == pytest.approx(expected, rel=ALPHA)
+    assert Solution().separateSquares(squares) == pytest.approx(
+        expected, rel=ALPHA
+    )

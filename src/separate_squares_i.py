@@ -1,4 +1,4 @@
-ALPHA = 1/10**5
+ALPHA = 1 / 10**5
 
 
 def get_area_below(limit: float, squares: list[list[int]]) -> float:
