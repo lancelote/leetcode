@@ -1,7 +1,7 @@
 from collections.abc import Iterator
 
 
-def tokens(s: str) -> Iterator[int | str]:
+def tokens(s: str) -> Iterator[str]:
     i = 0
 
     while i < len(s):
@@ -11,7 +11,7 @@ def tokens(s: str) -> Iterator[int | str]:
             while i < len(s) and s[i].isnumeric():
                 current.append(s[i])
                 i += 1
-            yield int("".join(current))
+            yield "".join(current)
         elif s[i].isalpha():
             while i < len(s) and s[i].isalpha():
                 current.append(s[i])
@@ -24,19 +24,19 @@ def tokens(s: str) -> Iterator[int | str]:
 
 class Solution:
     def decodeString(self, s: str) -> str:
-        stack: list[int | str] = []
+        stack: list[str] = []
 
         for x in tokens(s):
             if x == "]":
-                while isinstance(stack[-2], str):
+                while stack[-2].isalpha():
                     a, b = stack.pop(), stack.pop()
-                    stack.append(b + a)  # type: ignore
+                    stack.append(b + a)
 
                 a, b = stack.pop(), stack.pop()
-                stack.append(b * a)  # type: ignore
+                stack.append(int(b) * a)
             elif x == "[":
                 continue
             else:
                 stack.append(x)
 
-        return "".join(stack)  # type: ignore
+        return "".join(stack)
