@@ -2,7 +2,7 @@ import heapq
 
 
 class SeatManager:
-    def __init__(self, n: int):
+    def __init__(self, _: int):
         self.i = 1
         self._unreserved: list[int] = []
 

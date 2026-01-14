@@ -3,7 +3,7 @@ import heapq
 
 class Solution:
     def maxPerformance(
-        self, n: int, speed: list[int], efficiency: list[int], k: int
+        self, _: int, speed: list[int], efficiency: list[int], k: int
     ) -> int:
         max_perf = 0
         speed_sum = 0

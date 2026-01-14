@@ -1,5 +1,5 @@
 class Solution:
-    def buildArray(self, target: list[int], n: int) -> list[str]:
+    def buildArray(self, target: list[int], _: int) -> list[str]:
         stream = 1
         stack: list[int] = []
         ops: list[str] = []

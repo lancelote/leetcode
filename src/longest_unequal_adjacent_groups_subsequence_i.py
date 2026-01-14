@@ -1,6 +1,6 @@
 class Solution:
     def getWordsInLongestSubsequence(
-        self, n: int, words: list[str], groups: list[int]
+        self, _: int, words: list[str], groups: list[int]
     ) -> list[str]:
         result: list[int] = []
 

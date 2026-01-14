@@ -2,7 +2,7 @@ from collections import defaultdict
 
 
 class Solution:
-    def minReorder(self, n: int, connections: list[list[int]]) -> int:
+    def minReorder(self, _: int, connections: list[list[int]]) -> int:
         out_paths: dict[int, list[int]] = defaultdict(list)
         in_paths: dict[int, list[int]] = defaultdict(list)
 

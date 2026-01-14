@@ -2,9 +2,7 @@ from functools import cache
 
 
 class Solution:
-    def canFinish(
-        self, num_courses: int, prerequisites: list[list[int]]
-    ) -> bool:
+    def canFinish(self, _: int, prerequisites: list[list[int]]) -> bool:
         deps: dict[int, list[int]] = {}
 
         for [a, b] in prerequisites:
