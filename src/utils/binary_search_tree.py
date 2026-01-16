@@ -31,7 +31,7 @@ def insert(root: TreeNode | None, value: int | None) -> TreeNode | None:
     return root
 
 
-def list_to_tree(values: list[int]) -> TreeNode | None:
+def list_to_tree(values: list[int | None]) -> TreeNode | None:
     root = None
 
     for value in values:
