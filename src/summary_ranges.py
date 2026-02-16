@@ -3,21 +3,22 @@ class Solution:
         if not nums:
             return []
 
-        result: list[str] = []
-        left = right = nums[0]
+        ranges: list[str] = []
 
-        def append() -> None:
-            if left == right:
-                result.append(f"{left}")
-            else:
-                result.append(f"{left}->{right}")
+        a = nums[0]
+        b = nums[0]
+
+        def append_range() -> None:
+            ranges.append(str(a) if a == b else f"{a}->{b}")
 
         for i in range(1, len(nums)):
-            if nums[i] == right + 1:
-                right = nums[i]
-            else:
-                append()
-                left = right = nums[i]
+            c = nums[i]
 
-        append()
-        return result
+            if c - b == 1:
+                b = c
+            else:
+                append_range()
+                a = b = c
+
+        append_range()
+        return ranges
