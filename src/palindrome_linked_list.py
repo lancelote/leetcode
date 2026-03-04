@@ -30,6 +30,8 @@ class Solution:
         slow, fast = head, head
 
         while fast and fast.next and fast.next.next:
+            assert slow is not None
+
             slow = slow.next
             fast = fast.next.next
 
