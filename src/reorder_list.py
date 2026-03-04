@@ -9,6 +9,8 @@ class Solution:
         fast = head.next
 
         while fast and fast.next:
+            assert slow is not None
+
             slow = slow.next
             fast = fast.next.next
 
@@ -30,6 +32,8 @@ class Solution:
         second = prev
 
         while second:
+            assert first is not None and second is not None
+
             tmp1 = first.next
             tmp2 = second.next
 
