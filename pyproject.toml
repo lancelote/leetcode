@@ -7,8 +7,8 @@ requires-python = ">=3.14"
 dependencies = [
     "click==8.3.1",
     "pytest==9.0.2",
-    "ruff==0.14.14",
-    "ty==0.0.14",
+    "ruff==0.15.4",
+    "ty>=0.0.20",
 ]
 
 [tool.ruff]
