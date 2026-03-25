@@ -1,6 +1,6 @@
 class Solution:
     def champagneTower(self, poured: int, qr: int, qc: int) -> float:
-        dp: list[list[float]] = [[0] * i for i in range(1, 101)]
+        dp: list[list[float]] = [[0.0] * i for i in range(1, 101)]
         dp[0][0] = poured
 
         for r in range(99):
