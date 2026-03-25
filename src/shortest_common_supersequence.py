@@ -10,8 +10,10 @@ def lcs(str1: str, str2: str) -> str:
         for i2 in range(n2):
             if str1[i1] == str2[i2]:
                 new_dp[i2 + 1] = dp[i2] + str2[i2]
+            elif len(dp[i2 + 1]) > len(new_dp[i2]):
+                new_dp[i2 + 1] = dp[i2 + 1]
             else:
-                new_dp[i2 + 1] = max(dp[i2 + 1], new_dp[i2], key=len)
+                new_dp[i2 + 1] = new_dp[i2]
 
         dp = new_dp
 
