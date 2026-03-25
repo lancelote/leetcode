@@ -47,7 +47,7 @@ def test_list_to_tree(in_list, out_list):
 
 class TestListToTree:
     def test_not_full_last_layer(self):
-        lst = [3, 4, 5, 1, 2]
+        lst: list[int | None] = [3, 4, 5, 1, 2]
         tree = list_to_tree(lst)
 
         assert tree is not None
