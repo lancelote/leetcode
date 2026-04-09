@@ -3,17 +3,8 @@ import sys
 from pathlib import Path
 from urllib.parse import urlparse
 
-import click
-
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
-
-
-@click.command()
-@click.argument("problem")
-def cli(problem: str) -> None:
-    slug = parse_slug(problem)
-    create_templates(slug)
 
 
 def exists(path: Path) -> None:
@@ -52,5 +43,14 @@ def create_templates(name: str) -> None:
     logger.info("touch %s", test_file)
 
 
+def main() -> None:
+    if len(sys.argv) < 2:
+        logger.error("please provide problem URL or slug")
+        sys.exit(1)
+
+    slug = parse_slug(sys.argv[1])
+    create_templates(slug)
+
+
 if __name__ == "__main__":
-    cli()
+    main()

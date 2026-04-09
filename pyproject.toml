@@ -5,7 +5,6 @@ description = "My Leetcode exercise solutions in Python"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
-    "click==8.3.2",
     "pytest==9.0.3",
     "ruff==0.15.9",
     "ty==0.0.29",
@@ -105,3 +104,6 @@ ignore = [
 
 [tool.ruff.lint.isort]
 force-single-line = true
+
+[tool.pyrefly]
+search_path = ["."]
