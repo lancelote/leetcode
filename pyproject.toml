@@ -97,9 +97,9 @@ ignore = [
     "PLR0912",
     "FBT002",
     "FBT001",
-    "B904",
-    "RET504",
-    "PLW3301",
+
+    "RET504",  # produces less readable code
+    "PLW3301",  # produces slower code
 ]
 
 [tool.ruff.lint.isort]

@@ -5,7 +5,7 @@ class Solution:
         for token in tokens:
             try:
                 stack.append(int(token))
-            except ValueError:
+            except ValueError as e:
                 b = stack.pop()
                 a = stack.pop()
 
@@ -19,6 +19,6 @@ class Solution:
                     case "/":
                         stack.append(int(a / b))
                     case _:
-                        raise ValueError(f"unknown token: {token}")
+                        raise ValueError(f"unknown token: {token}") from e
 
         return stack[0]
