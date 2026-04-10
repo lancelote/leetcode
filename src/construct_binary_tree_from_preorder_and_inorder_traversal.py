@@ -5,25 +5,24 @@ class Solution:
     def buildTree(
         self, preorder: list[int], inorder: list[int]
     ) -> TreeNode | None:
-        root_pre_i = 0
+        to_inorder_i = {x: i for i, x in enumerate(inorder)}
+        preorder_i = 0
 
         def dfs(left: int, right: int) -> TreeNode | None:
-            nonlocal root_pre_i
+            nonlocal preorder_i
 
             if left > right:
                 return None
 
-            value = preorder[root_pre_i]
-            root_in_i = val_to_index[value]
-            node = TreeNode(value)
+            val = preorder[preorder_i]
+            inorder_i = to_inorder_i[val]
+            node = TreeNode(val)
 
-            root_pre_i += 1
+            preorder_i += 1
 
-            node.left = dfs(left, root_in_i - 1)
-            node.right = dfs(root_in_i + 1, right)
+            node.left = dfs(left, inorder_i - 1)
+            node.right = dfs(inorder_i + 1, right)
 
             return node
 
-        val_to_index = {val: i for i, val in enumerate(inorder)}
-
-        return dfs(0, len(preorder) - 1)
+        return dfs(0, len(inorder) - 1)
