@@ -37,7 +37,7 @@ class Solution:
 
             raise ValueError
 
-        def search(left: int, right: int, dec: bool = False) -> int:
+        def search_inc(left: int, right: int) -> int:
             while left <= right:
                 middle = (right - left) // 2 + left
                 mid_val = mountain_arr.get(middle)
@@ -45,15 +45,25 @@ class Solution:
                 if mid_val == target:
                     return middle
                 elif mid_val > target:
-                    if dec:
-                        left = middle + 1
-                    else:
-                        right = middle - 1
+                    right = middle - 1
                 elif mid_val < target:
-                    if dec:
-                        right = middle - 1
-                    else:
-                        left = middle + 1
+                    left = middle + 1
+                else:
+                    return middle
+
+            return -1
+
+        def search_dec(left: int, right: int) -> int:
+            while left <= right:
+                middle = (right - left) // 2 + left
+                mid_val = mountain_arr.get(middle)
+
+                if mid_val == target:
+                    return middle
+                elif mid_val > target:
+                    left = middle + 1
+                elif mid_val < target:
+                    right = middle - 1
                 else:
                     return middle
 
@@ -67,12 +77,12 @@ class Solution:
         elif target == peak_val:
             return peak
 
-        left_result = search(0, peak - 1)
+        left_result = search_inc(0, peak - 1)
 
         if left_result != -1:
             return left_result
 
-        right_result = search(peak + 1, length - 1, dec=True)
+        right_result = search_dec(peak + 1, length - 1)
 
         if right_result != -1:
             return right_result
