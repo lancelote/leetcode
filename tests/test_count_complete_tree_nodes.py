@@ -10,6 +10,8 @@ from src.utils.binary_tree import list_to_tree
         ([1, 2, 3, 4, 5, 6], 6),
         ([], 0),
         ([1], 1),
+        ([1, 2, 3], 3),
+        ([1, 2], 2),
     ],
 )
 def test_solution(in_list, expected):
