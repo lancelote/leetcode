@@ -1,26 +1,22 @@
-ROMAN_TO_INT = {
-    "I": 1,
-    "V": 5,
-    "X": 10,
-    "L": 50,
-    "C": 100,
-    "D": 500,
+TO_INT: dict[str, int] = {
     "M": 1000,
+    "D": 500,
+    "C": 100,
+    "L": 50,
+    "X": 10,
+    "V": 5,
+    "I": 1,
 }
 
 
 class Solution:
     def romanToInt(self, s: str) -> int:
-        n = len(s)
-        prev = result = ROMAN_TO_INT[s[0]]
+        total = TO_INT[s[-1]]
 
-        for i in range(1, n):
-            x = ROMAN_TO_INT[s[i]]
-
-            if x > prev:
-                result += x - 2 * prev
+        for i in range(len(s) - 1):
+            if TO_INT[s[i]] < TO_INT[s[i + 1]]:
+                total -= TO_INT[s[i]]
             else:
-                result += x
-            prev = x
+                total += TO_INT[s[i]]
 
-        return result
+        return total
