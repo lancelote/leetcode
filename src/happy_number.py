@@ -1,15 +1,20 @@
-def sum_of_squares_of_digits(n: int) -> int:
-    return sum(int(x) * int(x) for x in str(n))
-
-
 class Solution:
+    def get_next(self, n: int) -> int:
+        total = 0
+
+        while n != 0:
+            x = n % 10
+            total += x * x
+            n //= 10
+
+        return total
+
     def isHappy(self, n: int) -> bool:
-        cache: set[int] = set()
+        slow = n
+        fast = self.get_next(n)
 
-        while n != 1:
-            if n in cache:
-                return False
-            cache.add(n)
-            n = sum_of_squares_of_digits(n)
+        while fast != 1 and fast != slow:
+            slow = self.get_next(slow)
+            fast = self.get_next(self.get_next(fast))
 
-        return True
+        return fast == 1
