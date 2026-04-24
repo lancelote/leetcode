@@ -8,6 +8,7 @@ from src.add_digits import Solution
     [
         (38, 2),
         (0, 0),
+        (10, 1),
     ],
 )
 def test_solution(num, expected):
