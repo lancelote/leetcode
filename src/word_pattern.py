@@ -2,19 +2,23 @@ class Solution:
     def wordPattern(self, pattern: str, s: str) -> bool:
         words = s.split()
 
-        if len(pattern) != len(words):
+        if len(words) != len(pattern):
             return False
 
-        letter_to_word: dict[str, str] = {}
-        word_to_letter: dict[str, str] = {}
+        ch_to_word: dict[str, str] = {}
+        seen_words: set[str] = set()
 
-        for letter, word in zip(pattern, s.split()):
-            if letter_to_word.get(letter, word) != word:
-                return False
-            if word_to_letter.get(word, letter) != letter:
+        for i in range(len(words)):
+            ch = pattern[i]
+            word = words[i]
+
+            if ch in ch_to_word and ch_to_word[ch] != word:
                 return False
 
-            letter_to_word[letter] = word
-            word_to_letter[word] = letter
+            if ch not in ch_to_word and word in seen_words:
+                return False
+
+            ch_to_word[ch] = word
+            seen_words.add(word)
 
         return True

@@ -10,6 +10,7 @@ from src.word_pattern import Solution
         (False, "abba", "dog cat cat fish"),
         (False, "aaaa", "dog cat cat dog"),
         (False, "aaa", "aa aa aa aa"),
+        (False, "abba", "dog dog dog dog"),
     ),
 )
 def test_solution(expected, pattern, s):
