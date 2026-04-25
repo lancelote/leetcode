@@ -1,5 +1,5 @@
 class Solution:
-    def is_palindrome(self, s: str, left: int, right: int) -> bool:
+    def is_valid(self, s: str, left: int, right: int) -> bool:
         while left < right:
             if s[left] != s[right]:
                 return False
@@ -14,9 +14,9 @@ class Solution:
 
         while left < right:
             if s[left] != s[right]:
-                return self.is_palindrome(
-                    s, left + 1, right
-                ) or self.is_palindrome(s, left, right - 1)
+                return self.is_valid(s, left + 1, right) or self.is_valid(
+                    s, left, right - 1
+                )
 
             left += 1
             right -= 1

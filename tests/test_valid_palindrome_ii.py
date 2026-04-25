@@ -9,6 +9,7 @@ from src.valid_palindrome_ii import Solution
         ("aba", True),
         ("abca", True),
         ("abc", False),
+        ("eceec", True),
     ],
 )
 def test_solution(s, expected):
