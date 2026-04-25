@@ -1,46 +1,34 @@
-from collections import deque
-from typing import Deque
-
-Image = list[list[int]]
-
-
-SHIFTS = [
-    (+1, 0),
-    (0, +1),
-    (-1, 0),
-    (0, -1),
-]
+SHIFTS = (
+    (0, -1),  # up
+    (1, 0),  # right
+    (0, 1),  # down
+    (-1, 0),  # left
+)
 
 
 class Solution:
     def floodFill(
-        self, image: Image, row: int, col: int, new_color: int
-    ) -> Image:
-        assert image
-        assert image[0]
+        self, image: list[list[int]], sr: int, sc: int, color: int
+    ) -> list[list[int]]:
+        n_rows = len(image)
+        n_cols = len(image[0])
 
-        rows = len(image)
-        cols = len(image[0])
-        start_pixel = (row, col)
-        base_color = image[row][col]
-
-        if new_color == base_color:
+        old_color = image[sr][sc]
+        if old_color == color:
             return image
 
-        to_paint: Deque[tuple[int, int]] = deque()
-        to_paint.append(start_pixel)
+        to_fill = [(sr, sc)]
 
-        while to_paint:
-            row, col = to_paint.popleft()
-            valid_row = 0 <= row < rows
-            valid_col = 0 <= col < cols
+        while to_fill:
+            r, c = to_fill.pop()
+            image[r][c] = color
 
-            if not (valid_row and valid_col) or image[row][col] != base_color:
-                continue
+            for dr, dc in SHIFTS:
+                nr = r + dr
+                nc = c + dc
 
-            image[row][col] = new_color
-
-            for d_row, d_col in SHIFTS:
-                to_paint.append((row + d_row, col + d_col))
+                if 0 <= nr < n_rows and 0 <= nc < n_cols:
+                    if image[nr][nc] == old_color:
+                        to_fill.append((nr, nc))
 
         return image
