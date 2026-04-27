@@ -10,6 +10,7 @@ from src.longest_substring_without_repeating_characters import Solution
         ("bbbbb", 1),
         ("pwwkew", 3),
         ("", 0),
+        ("abba", 2),
     ],
 )
 def test_solution(s, expected):
