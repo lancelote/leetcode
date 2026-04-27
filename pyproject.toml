@@ -3,11 +3,11 @@ name = "leetcode"
 version = "0.1.0"
 description = "My Leetcode exercise solutions in Python"
 readme = "README.md"
-requires-python = ">=3.14"
+requires-python = ">=3.14.4"
 dependencies = [
     "pytest==9.0.3",
-    "ruff==0.15.10",
-    "ty==0.0.29",
+    "ruff==0.15.12",
+    "ty==0.0.32",
 ]
 
 [tool.ruff]
