@@ -3,7 +3,7 @@ import math
 
 class Solution:
     def will_take(self, mid: int, piles: list[int]) -> int:
-        return sum(int(math.ceil(pile / mid)) for pile in piles)
+        return sum(math.ceil(pile / mid) for pile in piles)
 
     def minEatingSpeed(self, piles: list[int], h: int) -> int:
         left = 1

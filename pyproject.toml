@@ -93,7 +93,6 @@ ignore = [
     "SIM118",
     "FBT003",
     "FBT001",
-    "RUF046",
     "PLR0912",
 
     "RET504",  # produces less readable code
