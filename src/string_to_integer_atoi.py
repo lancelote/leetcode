@@ -1,32 +1,35 @@
-TOP_LIMIT = 2**31 - 1
-BOTTOM_LIMIT = -(2**31)
-
-
 class Solution:
     def myAtoi(self, s: str) -> int:
-        num = 0
-        s = s.lstrip()
+        n = len(s)
+        i = 0
 
-        digits: list[str] = []
+        # skip space
+        while i < n and s[i] == " ":
+            i += 1
 
-        start = 0
-        if s and s[0] in {"+", "-"}:
-            start = 1
+        sign = 1
+        if i < n and s[i] == "-":
+            sign = -1
+            i += 1
 
-        for i in range(start, len(s)):
-            if not s[i].isdigit():
+        if sign == 1 and i < n and s[i] == "+":
+            i += 1
+
+        # skip zeros
+        while i < n and s[i] == "0":
+            i += 1
+
+        result = 0
+        while i < n:
+            if not s[i].isnumeric():
                 break
-            digits.append(s[i])
 
-        if digits:
-            num += int("".join(digits))
+            result = result * 10 + ord(s[i]) - 48
+            i += 1
 
-        if s and s[0] == "-":
-            num *= -1
+        if sign == -1 and result > 2147483648:
+            result = 2147483648
+        elif sign == 1 and result > 2147483647:
+            result = 2147483647
 
-        if num < BOTTOM_LIMIT:
-            num = BOTTOM_LIMIT
-        elif num > TOP_LIMIT:
-            num = TOP_LIMIT
-
-        return num
+        return sign * result
