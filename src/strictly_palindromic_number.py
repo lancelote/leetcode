@@ -9,7 +9,7 @@ def to_base(n: int, base: int) -> list[int]:
     result = []
 
     while n:
-        result.append(int(n % base))
+        result.append(n % base)
         n //= base
 
     return result

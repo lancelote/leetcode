@@ -24,7 +24,7 @@ class Solution:
             num = []
 
             for i in range(start, len(s)):
-                num.append(str(s[i]))
+                num.append(s[i])
 
                 if s[i] == "0":
                     continue

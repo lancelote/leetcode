@@ -5,7 +5,7 @@ def coord_to_tuple(coordinates: str) -> tuple[int, int]:
     column = coordinates[0]
     row = coordinates[1]
 
-    x = int(ord(column) - LOWERCASE_A_UNICODE_CODE_POINT)
+    x = ord(column) - LOWERCASE_A_UNICODE_CODE_POINT
     x += 1  # 1-based index
     y = int(row)
 
