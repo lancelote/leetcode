@@ -22,7 +22,7 @@ class Solution:
                 code = s[i] + s[i + 1] + "#"
                 i += 3
             else:
-                code = str(s[i])
+                code = s[i]
                 i += 1
             result.append(mapping[code])
 
