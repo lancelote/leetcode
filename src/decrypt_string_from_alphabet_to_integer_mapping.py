@@ -1,5 +1,5 @@
 def get_mapping() -> dict[str, str]:
-    mapping = {}
+    mapping: dict[str, str] = {}
 
     for i, ch in enumerate("abcdefghi", start=1):
         mapping[str(i)] = ch
