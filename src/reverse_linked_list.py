@@ -8,7 +8,6 @@ class Solution:
 
         prev = head
         curr = head.next
-        temp: ListNode | None = None
 
         prev.next = None
 
