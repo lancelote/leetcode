@@ -3,16 +3,16 @@ from src.utils.binary_tree import TreeNode
 
 class Solution:
     def rob(self, root: TreeNode | None) -> int:
-        def dfs(node: TreeNode | None, can_rob: bool) -> int:
-            if not node:
-                return 0
+        def dfs(node: TreeNode | None) -> tuple[int, int]:
+            if node is None:
+                return 0, 0
 
-            if can_rob:
-                return max(
-                    node.val + dfs(node.left, False) + dfs(node.right, False),
-                    dfs(node.left, True) + dfs(node.right, True),
-                )
-            else:
-                return dfs(node.left, True) + dfs(node.right, True)
+            left = dfs(node.left)
+            right = dfs(node.right)
 
-        return dfs(root, True)
+            return (
+                node.val + left[1] + right[1],
+                max(left) + max(right),
+            )
+
+        return max(dfs(root))
