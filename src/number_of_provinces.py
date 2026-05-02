@@ -1,22 +1,21 @@
 class Solution:
-    def findCircleNum(self, is_connected: list[list[int]]) -> int:
-        n = len(is_connected)
-        count = 0
+    def findCircleNum(self, isConnected: list[list[int]]) -> int:
+        result = 0
         seen: set[int] = set()
 
-        def visit(city: int) -> None:
+        def dfs(city: int) -> None:
             if city in seen:
                 return
 
             seen.add(city)
 
-            for neighbor, val in enumerate(is_connected[city]):
-                if val and neighbor not in seen:
-                    visit(neighbor)
+            for other in range(len(isConnected)):
+                if isConnected[city][other]:
+                    dfs(other)
 
-        for i in range(n):
+        for i in range(len(isConnected)):
             if i not in seen:
-                count += 1
-                visit(i)
+                dfs(i)
+                result += 1
 
-        return count
+        return result
