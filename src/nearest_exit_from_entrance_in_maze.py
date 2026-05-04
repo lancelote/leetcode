@@ -1,52 +1,45 @@
 from collections import deque
 
-
 SHIFTS = (
-    (0, -1),
-    (+1, 0),
-    (0, +1),
-    (-1, 0),
+    (-1, 0),  # up
+    (0, +1),  # left
+    (+1, 0),  # down
+    (0, -1),  # left
 )
 
 
 class Solution:
     def nearestExit(self, maze: list[list[str]], entrance: list[int]) -> int:
-        rows = len(maze)
-        cols = len(maze[0])
+        n_rows = len(maze)
+        n_cols = len(maze[0])
 
-        visited: set[tuple[int, int]] = set()
+        sr, sc = entrance
+        seen = {(sr, sc)}
+        to_visit = deque([(sr, sc)])
 
-        start = (entrance[0], entrance[1])
-        d: deque[tuple[int, int]] = deque()
+        steps = 0
+        while to_visit:
+            for _ in range(len(to_visit)):
+                r, c = to_visit.popleft()
 
-        visited.add(start)
-        d.append(start)
-
-        path = 0
-
-        while d:
-            for _ in range(len(d)):
-                r, c = d.popleft()
-
-                if (r == 0 or r == rows - 1 or c == 0 or c == cols - 1) and (
-                    r,
-                    c,
-                ) != start:
-                    return path
+                if (
+                    r == 0 or r == n_rows - 1 or c == 0 or c == n_cols - 1
+                ) and (r, c) != (sr, sc):
+                    return steps
 
                 for dr, dc in SHIFTS:
                     nr = r + dr
                     nc = c + dc
 
                     if (
-                        0 <= nr < rows
-                        and 0 <= nc < cols
+                        (nr, nc) not in seen
+                        and 0 <= nr < n_rows
+                        and 0 <= nc < n_cols
                         and maze[nr][nc] == "."
-                        and (nr, nc) not in visited
                     ):
-                        d.append((nr, nc))
-                        visited.add((nr, nc))
+                        to_visit.append((nr, nc))
+                        seen.add((nr, nc))
 
-            path += 1
+            steps += 1
 
         return -1
