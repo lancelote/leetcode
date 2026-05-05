@@ -1,4 +1,4 @@
-LETTERS = {
+DIGIT_TO_LETTERS = {
     "2": "abc",
     "3": "def",
     "4": "ghi",
@@ -12,22 +12,22 @@ LETTERS = {
 
 class Solution:
     def letterCombinations(self, digits: str) -> list[str]:
-        n = len(digits)
-        result: list[str] = []
+        if not digits:
+            return []
 
-        def dfs(i: int, so_far: list[str]) -> None:
-            if i == n:
-                result.append("".join(so_far))
+        result: list[str] = []
+        current: list[str] = []
+
+        def dfs(i: int) -> None:
+            if i == len(digits):
+                result.append("".join(current))
                 return
 
             digit = digits[i]
+            for letter in DIGIT_TO_LETTERS[digit]:
+                current.append(letter)
+                dfs(i + 1)
+                current.pop()
 
-            for x in LETTERS[digit]:
-                so_far.append(x)
-                dfs(i + 1, so_far)
-                so_far.pop()
-
-        if digits:
-            dfs(0, [])
-
+        dfs(0)
         return result
