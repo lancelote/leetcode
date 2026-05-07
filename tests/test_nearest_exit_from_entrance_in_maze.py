@@ -25,7 +25,7 @@ from src.nearest_exit_from_entrance_in_maze import Solution
                 ["+", ".", ".", ".", ".", ".", "+"],
                 ["+", "+", "+", "+", ".", "+", "."],
             ],
-            (0, 1),
+            [0, 1],
             7,
         ),
     ],
