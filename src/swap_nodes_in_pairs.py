@@ -3,24 +3,36 @@ from src.utils.linked_list import ListNode
 
 class Solution:
     def swapPairs(self, head: ListNode | None) -> ListNode | None:
-        dummy = ListNode(0)
-        dummy.next = head
+        dummy_odd = odd = ListNode(-1)
+        dummy_even = even = ListNode(-1)
 
-        before = dummy
+        while head:
+            odd.next = head
+            odd = odd.next
+            head = head.next
 
-        while before.next and before.next.next:
-            a = before.next
-            b = a.next
+            if head:
+                even.next = head
+                even = even.next
+                head = head.next
 
-            assert a is not None
-            assert b is not None
+        odd.next = None
+        even.next = None
 
-            after = b.next
+        odd = dummy_odd.next
+        even = dummy_even.next
 
-            a.next = after
-            b.next = a
-            before.next = b
+        dummy = ListNode(-1)
+        current = dummy
 
-            before = a
+        while odd:
+            if even:
+                current.next = even
+                current = current.next
+                even = even.next
+
+            current.next = odd
+            current = current.next
+            odd = odd.next
 
         return dummy.next
