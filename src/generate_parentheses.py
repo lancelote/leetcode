@@ -1,22 +1,31 @@
 class Solution:
     def generateParenthesis(self, n: int) -> list[str]:
-        stack: list[str] = []
         result: list[str] = []
 
-        def dfs(start: int, end: int) -> None:
-            if start == end == n:
-                result.append("".join(stack))
+        current: list[str] = []
+        to_open = n
+
+        def dfs() -> None:
+            nonlocal n
+            nonlocal to_open
+
+            if n == 0:
+                result.append("".join(current))
                 return
 
-            if start < n:
-                stack.append("(")
-                dfs(start + 1, end)
-                stack.pop()
+            if to_open != 0:
+                current.append("(")
+                to_open -= 1
+                dfs()
+                to_open += 1
+                current.pop()
 
-            if start != end:
-                stack.append(")")
-                dfs(start, end + 1)
-                stack.pop()
+            if n - to_open != 0:
+                current.append(")")
+                n -= 1
+                dfs()
+                n += 1
+                current.pop()
 
-        dfs(0, 0)
+        dfs()
         return result
