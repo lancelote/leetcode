@@ -1,59 +1,56 @@
 class Node:
     def __init__(self) -> None:
         self.children: dict[str, Node] = {}
-        self.is_word = False
+        self.is_final = False
 
 
 class Trie:
     def __init__(self) -> None:
         self.root = Node()
 
-    def insert(self, word: str) -> None:
-        node = self.root
+    def insert_word(self, word: str) -> None:
+        current = self.root
 
         for x in word:
-            if x not in node.children:
-                node.children[x] = Node()
-            node = node.children[x]
+            if x in current.children:
+                current = current.children[x]
+            else:
+                new_node = Node()
+                current.children[x] = new_node
+                current = new_node
 
-        node.is_word = True
+        current.is_final = True
 
-    def find_node_by_prefix(self, prefix: str) -> Node | None:
-        node = self.root
+    def insert_words(self, words: list[str]) -> None:
+        for word in sorted(words):
+            self.insert_word(word)
+
+    def get_three_by_prefix(self, prefix: list[str]) -> list[str]:
+        result: list[str] = []
+
+        path: list[str] = []
+        start_node = self.root
 
         for x in prefix:
-            if x not in node.children:
-                return None
-            node = node.children[x]
+            if x in start_node.children:
+                start_node = start_node.children[x]
+                path.append(x)
+            else:
+                return []
 
-        return node
+        def dfs(node: Node) -> None:
+            if len(result) == 3:
+                return
 
-    def find_all_with_prefix(self, prefix: str) -> list[str]:
-        node = self.find_node_by_prefix(prefix)
+            if node.is_final:
+                result.append("".join(path))
 
-        if not node:
-            return []
+            for k, v in node.children.items():
+                path.append(k)
+                dfs(v)
+                path.pop()
 
-        result: list[str] = []
-        if node.is_word:
-            result.append(prefix)
-
-        postfix: list[str] = []
-
-        def dfs(curr_node: Node) -> None:
-            for x, next_node in curr_node.children.items():
-                if len(result) == 3:
-                    return
-
-                postfix.append(x)
-
-                if next_node.is_word:
-                    result.append(prefix + "".join(postfix))
-
-                dfs(next_node)
-                postfix.pop()
-
-        dfs(node)
+        dfs(start_node)
         return result
 
 
@@ -61,16 +58,14 @@ class Solution:
     def suggestedProducts(
         self, products: list[str], search_word: str
     ) -> list[list[str]]:
-        trie = Trie()
-
-        for product in sorted(products):
-            trie.insert(product)
-
         result: list[list[str]] = []
-        prefix: list[str] = []
 
+        trie = Trie()
+        trie.insert_words(products)
+
+        prefix: list[str] = []
         for x in search_word:
             prefix.append(x)
-            result.append(trie.find_all_with_prefix("".join(prefix)))
+            result.append(trie.get_three_by_prefix(prefix))
 
         return result
