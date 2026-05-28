@@ -1,5 +1,6 @@
 import typing
 from collections import deque
+from collections.abc import Sequence
 
 from src.utils.binary_tree import TreeNode
 
@@ -31,7 +32,7 @@ def insert(root: TreeNode | None, value: int | None) -> TreeNode | None:
     return root
 
 
-def list_to_tree(values: list[int | None]) -> TreeNode | None:
+def list_to_tree(values: Sequence[int | None]) -> TreeNode | None:
     root = None
 
     for value in values:

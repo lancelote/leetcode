@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import typing
 from collections import deque
+from collections.abc import Sequence
 
 
 class TreeNode:
@@ -48,7 +49,7 @@ def tree_to_list(root: TreeNode | None) -> list[int | None]:
     return result
 
 
-def list_to_tree(lst: list[int | None]) -> TreeNode | None:
+def list_to_tree(lst: Sequence[int | None]) -> TreeNode | None:
     if not lst:
         return None
 
