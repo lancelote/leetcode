@@ -1,10 +1,12 @@
+from collections.abc import Sequence
+
 import pytest
 
 from src.copy_list_with_random_pointer import Node
 from src.copy_list_with_random_pointer import Solution
 
 
-def to_list(in_data: list[list[int | None]]) -> Node | None:
+def to_list(in_data: Sequence[Sequence[int | None]]) -> Node | None:
     dummy = Node(-1)
     current = dummy
 
