@@ -30,6 +30,6 @@ from src.set_matrix_zeroes import Solution
         ),
     ],
 )
-def test_solution(matrix, expected):
+def test_solution(matrix: list[list[int | None]], expected):
     Solution().setZeroes(matrix)
     assert matrix == expected
