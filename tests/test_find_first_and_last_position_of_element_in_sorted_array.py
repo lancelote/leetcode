@@ -13,6 +13,7 @@ from src.find_first_and_last_position_of_element_in_sorted_array import (
         ([], 0, [-1, -1]),
         ([1], 1, [0, 0]),
         ([1, 3], 1, [0, 0]),
+        ([2, 2], 2, [0, 1]),
     ),
 )
 def test_solution(nums, target, expected):
