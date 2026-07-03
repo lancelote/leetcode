@@ -7,7 +7,7 @@ class Solution:
 
         closest = root.val
 
-        while root:
+        while root is not None:
             closest = min(closest, root.val, key=lambda x: (abs(target - x), x))
             root = root.left if target < root.val else root.right
 

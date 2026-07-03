@@ -33,8 +33,8 @@ class MyLinkedList:
         prev_node = self.head
         next_node = self.head.next
 
-        assert prev_node
-        assert next_node
+        assert prev_node is not None
+        assert next_node is not None
 
         next_node.prev = new_node
         new_node.next = next_node
@@ -46,8 +46,8 @@ class MyLinkedList:
         prev_node = self.tail.prev
         next_node = self.tail
 
-        assert prev_node
-        assert next_node
+        assert prev_node is not None
+        assert next_node is not None
 
         next_node.prev = new_node
         new_node.next = next_node
@@ -70,8 +70,8 @@ class MyLinkedList:
         prev_node = node.prev
         next_node = node
 
-        assert prev_node
-        assert next_node
+        assert prev_node is not None
+        assert next_node is not None
 
         next_node.prev = new_node
         new_node.next = next_node
