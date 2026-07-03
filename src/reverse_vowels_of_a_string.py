@@ -3,23 +3,17 @@ VOWELS = {"a", "e", "i", "o", "u", "A", "E", "I", "O", "U"}
 
 class Solution:
     def reverseVowels(self, s: str) -> str:
-        n = len(s)
-        result = list(s)
+        result: list[str] = []
 
-        left = 0
-        right = n - 1
+        vowels: list[str] = []
+        for x in s:
+            if x in VOWELS:
+                vowels.append(x)
 
-        while left < right:
-            if s[left] not in VOWELS:
-                left += 1
-                continue
-
-            if s[right] not in VOWELS:
-                right -= 1
-                continue
-
-            result[left], result[right] = result[right], result[left]
-            left += 1
-            right -= 1
+        for x in s:
+            if x in VOWELS:
+                result.append(vowels.pop())
+            else:
+                result.append(x)
 
         return "".join(result)
