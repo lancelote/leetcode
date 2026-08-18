@@ -2,7 +2,6 @@ import heapq
 
 
 class SmallestInfiniteSet:
-
     def __init__(self):
         self.left_limit = 1
         self.added_back_heap: list[int] = []
