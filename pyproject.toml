@@ -95,8 +95,10 @@ ignore = [
     "FBT001",
     "PLR0912",
 
-    "RET504",  # produces less readable code
+    "RET504",   # produces less readable code
     "PLW3301",  # produces slower code
+    "PLR0917",  # I know better
+    "CPY001",   # I don't care about copyrights
 ]
 
 [tool.ruff.lint.isort]
