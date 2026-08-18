@@ -2,22 +2,28 @@ import heapq
 
 
 class SmallestInfiniteSet:
-    def __init__(self) -> None:
-        self.h: list[int] = []
-        self.added_back: set[int] = set()
-        self.top = 1
+
+    def __init__(self):
+        self.left_limit = 1
+        self.added_back_heap: list[int] = []
+        self.added_back_set: set[int] = set()
 
     def popSmallest(self) -> int:
-        if self.h:
-            pop = heapq.heappop(self.h)
+        if self.added_back_set:
+            smallest = heapq.heappop(self.added_back_heap)
+            self.added_back_set.remove(smallest)
         else:
-            pop = self.top
-            self.top += 1
+            smallest = self.left_limit
+            self.left_limit += 1
 
-        self.added_back.discard(pop)
-        return pop
+        return smallest
 
     def addBack(self, num: int) -> None:
-        if num < self.top and num not in self.added_back:
-            self.added_back.add(num)
-            heapq.heappush(self.h, num)
+        if num >= self.left_limit:
+            return
+
+        if num in self.added_back_set:
+            return
+
+        heapq.heappush(self.added_back_heap, num)
+        self.added_back_set.add(num)
