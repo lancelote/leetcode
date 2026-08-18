@@ -6,7 +6,7 @@ from src.utils.binary_tree import TreeNode
 
 def leaf_value_seq(root: TreeNode | None) -> Iterator[int]:
     if not root:
-        raise StopIteration
+        return
 
     stack = [root]
 
