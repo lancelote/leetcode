@@ -9,7 +9,7 @@ class MyHashSet:
     def __init__(self) -> None:
         self.size = 0
         self.capacity = 2
-        self.data: list[int | None | Removed] = [None, None]
+        self.data: list[int | Removed | None] = [None, None]
 
     def add(self, key: int) -> None:
         index = self.hash(key)
