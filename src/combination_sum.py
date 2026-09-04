@@ -1,28 +1,29 @@
-import copy
-
-
 class Solution:
     def combinationSum(
         self, candidates: list[int], target: int
     ) -> list[list[int]]:
-        combinations: list[list[int]] = []
+        result: list[list[int]] = []
+        current: list[int] = []
 
-        def dfs(start: int, total: int, path: list[int]) -> None:
-            total += candidates[start]
-            path.append(candidates[start])
-
-            if total > target:
+        def dfs(candidate_idx: int = 0, sum_so_far: int = 0) -> None:
+            if candidate_idx >= len(candidates):
                 return
 
-            if total == target:
-                combinations.append(copy.copy(path))
+            if sum_so_far > target:
                 return
 
-            for i in range(start, len(candidates)):
-                dfs(i, total, path)
-                path.pop()
+            if sum_so_far == target:
+                result.append(current[::])
+                return
 
-        for start_idx in range(len(candidates)):
-            dfs(start_idx, 0, [])
+            # add once again
+            candidate = candidates[candidate_idx]
+            current.append(candidate)
+            dfs(candidate_idx, sum_so_far + candidate)
+            current.pop()
 
-        return combinations
+            # move forward
+            dfs(candidate_idx + 1, sum_so_far)
+
+        dfs()
+        return result
