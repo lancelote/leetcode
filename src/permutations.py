@@ -1,19 +1,17 @@
-import copy
-
-
 class Solution:
     def permute(self, nums: list[int]) -> list[list[int]]:
-        permutations: list[list[int]] = [[]]
+        n = len(nums)
+        result: list[list[int]] = []
 
-        for num in nums:
-            new_permutations: list[list[int]] = []
+        def backtrack(start: int) -> None:
+            if start == n:
+                result.append(nums[::])
+                return
 
-            for permutation in permutations:
-                for i in range(len(permutation) + 1):
-                    permutation_copy = copy.copy(permutation)
-                    permutation_copy.insert(i, num)
-                    new_permutations.append(permutation_copy)
+            for i in range(start, n):
+                nums[start], nums[i] = nums[i], nums[start]
+                backtrack(start + 1)
+                nums[i], nums[start] = nums[start], nums[i]
 
-            permutations = new_permutations
-
-        return permutations
+        backtrack(0)
+        return result
