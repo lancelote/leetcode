@@ -1,27 +1,24 @@
-from typing import TypeAlias
-
-Matrix: TypeAlias = list[list[int]]
-
-
-def transpose(matrix: Matrix) -> None:
-    rows = len(matrix)
-    cols = len(matrix[0])
-
-    for r in range(rows - 1):
-        for c in range(r + 1, cols):
-            matrix[r][c], matrix[c][r] = matrix[c][r], matrix[r][c]
-
-
-def reflect(matrix: Matrix) -> None:
-    cols = len(matrix[0])
-
-    for r, row in enumerate(matrix):
-        for c in range(cols // 2):
-            new_c = cols - c - 1
-            matrix[r][c], matrix[r][new_c] = matrix[r][new_c], matrix[r][c]
-
-
 class Solution:
-    def rotate(self, matrix: Matrix) -> None:
-        transpose(matrix)
-        reflect(matrix)
+    def reflect(self, matrix: list[list[int]]) -> None:
+        n = len(matrix[0])
+
+        for row in matrix:
+            for col_idx in range(n // 2):
+                left_idx = col_idx
+                right_idx = n - col_idx - 1
+
+                row[left_idx], row[right_idx] = row[right_idx], row[left_idx]
+
+    def transpose(self, matrix: list[list[int]]) -> None:
+        n = len(matrix)
+
+        for row_idx in range(n):
+            for col_idx in range(row_idx + 1, n):
+                matrix[col_idx][row_idx], matrix[row_idx][col_idx] = (
+                    matrix[row_idx][col_idx],
+                    matrix[col_idx][row_idx],
+                )
+
+    def rotate(self, matrix: list[list[int]]) -> None:
+        self.transpose(matrix)
+        self.reflect(matrix)
