@@ -1,36 +1,35 @@
-import math
+from math import ceil
 
 
 class Solution:
     def spiralOrder(self, matrix: list[list[int]]) -> list[int]:
-        result: list[int] = []
+        n_rows = len(matrix)
+        n_cols = len(matrix[0])
+        n_layers = min(ceil(n_rows / 2), ceil(n_cols / 2))
 
-        rows = len(matrix)
-        cols = len(matrix[0])
+        elements: list[int] = []
 
-        layers = math.ceil(min(rows, cols) / 2)
+        for layer_idx in range(n_layers):
+            # top
+            for col_idx in range(layer_idx, n_cols - layer_idx):
+                elements.append(matrix[layer_idx][col_idx])
 
-        for layer in range(layers):
-            # left to right
-            for c in range(layer, cols - layer):
-                result.append(matrix[layer][c])
-
-            # top to bottom
-            for r in range(layer + 1, rows - layer):
-                result.append(matrix[r][cols - layer - 1])
-
-            if layer == rows - layer - 1:
+            if layer_idx == n_rows - layer_idx - 1:
                 break  # single row layer
 
-            # right to left
-            for c in range(cols - layer - 2, layer - 1, -1):
-                result.append(matrix[rows - layer - 1][c])
+            # right
+            for row_idx in range(layer_idx + 1, n_rows - layer_idx):
+                elements.append(matrix[row_idx][n_cols - layer_idx - 1])
 
-            if layer == cols - layer - 1:
+            if layer_idx == n_cols - layer_idx - 1:
                 break  # single column layer
 
-            # bottom to top
-            for r in range(rows - layer - 2, layer, -1):
-                result.append(matrix[r][layer])
+            # bottom
+            for col_idx in range(n_cols - layer_idx - 2, layer_idx - 1, -1):
+                elements.append(matrix[n_rows - layer_idx - 1][col_idx])
 
-        return result
+            # left
+            for row_idx in range(n_rows - layer_idx - 2, layer_idx, -1):
+                elements.append(matrix[row_idx][layer_idx])
+
+        return elements
