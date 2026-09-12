@@ -7,6 +7,6 @@ class Solution:
             digit = column_number % 26
             column_number //= 26
 
-            result.append(chr(digit + ord('A')))
+            result.append(chr(digit + ord("A")))
 
         return "".join(result[::-1])
