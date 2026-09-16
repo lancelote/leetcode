@@ -1,11 +1,12 @@
 class Solution:
     def subsets(self, nums: list[int]) -> list[list[int]]:
+        n = len(nums)
         result: list[list[int]] = []
         current: list[int] = []
 
-        def dfs(i: int = 0) -> None:
-            if i == len(nums):
-                result.append(current.copy())
+        def dfs(i: int) -> None:
+            if i >= n:
+                result.append(current[::])
                 return
 
             dfs(i + 1)
@@ -13,5 +14,5 @@ class Solution:
             dfs(i + 1)
             current.pop()
 
-        dfs()
+        dfs(0)
         return result
