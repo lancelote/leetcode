@@ -24,6 +24,13 @@ from src.word_search import Solution
         ([["A"]], "A", True),
         ([["B"]], "A", False),
         ([["A", "B"], ["A", "B"]], "ABC", False),
+        ([["C", "A", "A"], ["A", "A", "A"], ["B", "C", "D"]], "AAB", True),
+        (
+            [["a", "a", "a", "a"], ["a", "a", "a", "a"], ["a", "a", "a", "a"]],
+            "aaaaaaaaaaaaa",
+            False,
+        ),
+        ([["a", "a"], ["a", "a"]], "aaaaa", False),
     ],
 )
 def test_solution(board, word, expected):

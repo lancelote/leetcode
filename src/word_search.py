@@ -1,47 +1,45 @@
-SHIFTS = [
-    (-1, 0),
-    (0, +1),
-    (+1, 0),
-    (0, -1),
-]
-
-
 class Solution:
     def exist(self, board: list[list[str]], word: str) -> bool:
-        assert word
-        assert board
-        assert board[0]
+        n_rows = len(board)
+        n_cols = len(board[0])
 
-        rows = len(board)
-        cols = len(board[0])
+        seen: set[tuple[int, int]] = set()
 
-        def find(i: int, r: int, c: int) -> bool:
-            if i == len(word):
+        def dfs(r: int, c: int, letter_idx: int = 0) -> bool:
+            if letter_idx == len(word):
                 return True
 
-            if r < 0 or r >= rows or c < 0 or c >= cols:
+            if r < 0 or r >= n_rows or c < 0 or c >= n_cols:
                 return False
 
-            if word[i] != board[r][c]:
+            if word[letter_idx] != board[r][c]:
                 return False
 
-            if not board[r][c]:
+            if (r, c) in seen:
                 return False
 
-            tmp = board[r][c]
-            board[r][c] = ""
+            seen.add((r, c))
 
-            for dr, dc in SHIFTS:
-                if find(i + 1, r + dr, c + dc):
+            for dr, dc in (
+                (-1, 0),
+                (0, 1),
+                (1, 0),
+                (0, -1),
+            ):
+                nr = r + dr
+                nc = c + dc
+
+                if dfs(nr, nc, letter_idx + 1):
                     return True
 
-            board[r][c] = tmp
+            seen.discard((r, c))
+
             return False
 
-        for r, row in enumerate(board):
-            for c, x in enumerate(row):
-                if x == word[0]:
-                    if find(0, r, c):
+        for row_idx, row in enumerate(board):
+            for col_idx, letter in enumerate(row):
+                if letter == word[0]:
+                    if dfs(row_idx, col_idx):
                         return True
 
         return False
