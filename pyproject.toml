@@ -97,6 +97,7 @@ ignore = [
 
     "RET504",   # produces less readable code
     "PLW3301",  # produces slower code
+    "PLR0911",  # I know better how many returns I need
     "PLR0917",  # I know better
     "CPY001",   # I don't care about copyrights
 ]
