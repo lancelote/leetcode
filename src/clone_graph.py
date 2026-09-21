@@ -3,25 +3,29 @@ from src.utils.undirected_graph import Node
 
 class Solution:
     def cloneGraph(self, root: Node | None) -> Node | None:
-        index_to_node: dict[int, Node] = {}
+        if root is None:
+            return None
 
-        def dfs(node: Node | None) -> Node | None:
-            if not node:
-                return None
+        old_to_new: dict[Node, Node] = {}
 
-            if node.val in index_to_node:
-                return index_to_node[node.val]
+        def dfs(old_node: Node | None) -> None:
+            if old_node is None:
+                return
 
-            new_node = Node(node.val)
-            index_to_node[new_node.val] = new_node
-            neighbors: list[Node] = []
+            if old_node in old_to_new:
+                return
 
-            for neighbor in node.neighbors:
-                new_neighbor = dfs(neighbor)
-                if new_neighbor:
-                    neighbors.append(new_neighbor)
+            new_node = Node(val=old_node.val)
+            old_to_new[old_node] = new_node
 
-            new_node.neighbors = neighbors
-            return new_node
+            for node in old_node.neighbors:
+                dfs(node)
 
-        return dfs(root)
+        dfs(root)
+
+        for old_node, new_node in old_to_new.items():
+            new_node.neighbors = [
+                old_to_new[node] for node in old_node.neighbors
+            ]
+
+        return old_to_new[root]
