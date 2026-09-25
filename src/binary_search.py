@@ -1,14 +1,14 @@
 class Solution:
     def search(self, nums: list[int], target: int) -> int:
-        left = 0
-        right = len(nums)
+        left, right = 0, len(nums)
 
         while left < right:
             middle = (right - left) // 2 + left
+            guess = nums[middle]
 
-            if nums[middle] == target:
+            if guess == target:
                 return middle
-            elif nums[middle] < target:
+            elif guess < target:
                 left = middle + 1
             else:
                 right = middle
