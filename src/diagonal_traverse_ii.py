@@ -4,7 +4,7 @@ from collections import deque
 class Solution:
     def findDiagonalOrder(self, nums: list[list[int]]) -> list[int]:
         result: list[int] = []
-        d = deque(((0, 0),))
+        d: deque[tuple[int, int]] = deque(((0, 0),))
 
         while d:
             r, c = d.popleft()

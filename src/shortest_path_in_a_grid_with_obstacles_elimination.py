@@ -20,7 +20,9 @@ class Solution:
         if k >= rows + cols - 2:
             return rows + cols - 2
 
-        dq = deque([(0, 0, k, 0)])  # row, col, k, path
+        dq: deque[tuple[int, int, int, int]] = deque(
+            [(0, 0, k, 0)]
+        )  # row, col, k, path
         seen: set[tuple[int, int, int]] = set()
 
         while dq:

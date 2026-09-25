@@ -4,7 +4,7 @@ from collections import deque
 class Solution:
     def minMutation(self, start: str, end: str, bank: list[str]) -> int:
         bank_set = set(bank)
-        queue = deque([(start, 0)])
+        queue: deque[tuple[str, int]] = deque([(start, 0)])
         seen = {start}
 
         while queue:
