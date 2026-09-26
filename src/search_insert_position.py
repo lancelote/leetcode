@@ -3,13 +3,14 @@ class Solution:
         left, right = 0, len(nums) - 1
 
         while left <= right:
-            middle = left + (right - left) // 2
+            middle = (right - left) // 2 + left
+            guess = nums[middle]
 
-            if nums[middle] == target:
+            if guess == target:
                 return middle
-            elif nums[middle] > target:
-                right = middle - 1
-            else:
+            elif guess < target:
                 left = middle + 1
+            else:
+                right = middle - 1
 
         return left
