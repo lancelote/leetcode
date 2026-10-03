@@ -1,25 +1,22 @@
 class Solution:
     def wordBreak(self, s: str, word_dict: list[str]) -> bool:
-        n = len(s)
         cache: dict[int, bool] = {}
 
-        def dfs(i: int) -> bool:
-            if i == n:
+        def dp(idx: int) -> bool:
+            if idx < 0:
                 return True
 
-            if i > n:
-                return False
-
-            if i in cache:
-                return cache[i]
+            if idx in cache:
+                return cache[idx]
 
             for word in word_dict:
-                if s[i : i + len(word)] == word:
-                    result = dfs(i + len(word))
-                    cache[i + len(word)] = result
-                    if result:
-                        return True
+                if s[idx - len(word) + 1 : idx + 1] == word and dp(
+                    idx - len(word)
+                ):
+                    cache[idx] = True
+                    return True
 
+            cache[idx] = False
             return False
 
-        return dfs(0)
+        return dp(len(s) - 1)
