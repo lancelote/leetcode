@@ -1,83 +1,87 @@
 class Node:
-    def __init__(self, val: int, key: int) -> None:
-        self.val = val
+    def __init__(
+        self,
+        key: int,
+        val: int,
+        next_node: Node | None = None,
+        prev_node: Node | None = None,
+    ) -> None:
         self.key = key
+        self.val = val
+        self.next_node = next_node
+        self.prev_node = prev_node
 
-        self.nxt: Node | None = None
-        self.prv: Node | None = None
-
-    def __str__(self) -> str:
-        return f"Node(val={self.val}, key={self.key})"
+    def __repr__(self) -> str:
+        return f"Node(key={self.key}, val={self.val})"
 
 
 class LRUCache:
     def __init__(self, capacity: int) -> None:
-        self.n = capacity
+        self.capacity = capacity
+        self.key_to_node: dict[int, Node] = {}
 
         self.head = Node(-1, -1)
         self.tail = Node(-1, -1)
 
-        self.head.nxt = self.tail
-        self.tail.prv = self.head
-
-        self.cache: dict[int, Node] = {}
+        self.head.next_node = self.tail
+        self.tail.prev_node = self.head
 
     def get(self, key: int) -> int:
-        if key in self.cache:
-            node = self.cache[key]
-            self.touch(node)
-            return node.val
-        else:
+        if key not in self.key_to_node:
             return -1
 
-    def touch(self, node: Node | None) -> None:
+        node = self.key_to_node[key]
+
         self.cut(node)
-        self.append(node)
+        self.append_left(node)
 
-    def append(self, node: Node | None) -> None:
-        assert node
-
-        prv = self.tail.prv
-        assert prv
-        prv.nxt = node
-        node.nxt = self.tail
-        self.tail.prv = node
-        node.prv = prv
-
-    @staticmethod
-    def cut(node: Node | None) -> None:
-        assert node
-
-        prv = node.prv
-        nxt = node.nxt
-        assert prv and nxt
-        prv.nxt = nxt
-        nxt.prv = prv
-
-    def pop_left(self) -> None:
-        if self.head.nxt is not self.tail:
-            node = self.head.nxt
-            self.cut(node)
-            assert node
-            del self.cache[node.key]
+        return node.val
 
     def put(self, key: int, value: int) -> None:
-        # existing key, update
-        if key in self.cache:
-            node = self.cache[key]
-            node.val = value
-            self.touch(node)
+        if key in self.key_to_node:
+            existing_node = self.key_to_node[key]
+            self.cut(existing_node)
 
-        # new key, free space available
-        elif self.n:
-            node = Node(value, key)
-            self.append(node)
-            self.cache[key] = node
-            self.n -= 1
+        new_node = Node(key, value)
+        self.append_left(new_node)
 
-        # new key, no free space
-        else:
-            node = Node(value, key)
-            self.pop_left()
-            self.append(node)
-            self.cache[key] = node
+    def cut(self, node: Node) -> None:
+        assert len(self.key_to_node) > 0
+
+        prev_node = node.prev_node
+        next_node = node.next_node
+
+        assert prev_node is not None
+        assert next_node is not None
+
+        prev_node.next_node = next_node
+        next_node.prev_node = prev_node
+
+        node.prev_node = None
+        node.next_node = None
+
+        del self.key_to_node[node.key]
+
+    def append_left(self, node: Node) -> None:
+        old_first = self.head.next_node
+
+        assert old_first is not None
+
+        self.head.next_node = node
+        node.next_node = old_first
+        old_first.prev_node = node
+        node.prev_node = self.head
+
+        self.key_to_node[node.key] = node
+
+        if len(self.key_to_node) > self.capacity:
+            self.pop()
+
+    def pop(self) -> None:
+        assert len(self.key_to_node) > 0
+
+        node_to_remove = self.tail.prev_node
+
+        assert node_to_remove is not None
+
+        self.cut(node_to_remove)
