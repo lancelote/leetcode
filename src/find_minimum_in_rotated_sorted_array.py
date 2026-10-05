@@ -1,22 +1,18 @@
 class Solution:
     def findMin(self, nums: list[int]) -> int:
-        assert nums
+        assert len(nums) != 0
 
-        smallest = nums[0]
-        left = 0
-        right = len(nums) - 1
+        left, right = 0, len(nums) - 1
+        min_value = nums[0]
 
         while left <= right:
-            if nums[left] < nums[right]:
-                smallest = min(smallest, nums[left])
-                break
+            middle = left + (right - left) // 2
+            guess = nums[middle]
 
-            middle = (left + right) // 2
-
-            if nums[middle] >= smallest:
+            if guess >= min_value:
                 left = middle + 1
             else:
-                smallest = nums[middle]
+                min_value = guess
                 right = middle - 1
 
-        return smallest
+        return min_value
