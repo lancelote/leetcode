@@ -1,15 +1,16 @@
 class Solution:
     def findPeakElement(self, nums: list[int]) -> int:
+        n = len(nums)
         left, right = 0, len(nums) - 1
 
         while left <= right:
-            m = (left + right) // 2
+            middle = left + (right - left) // 2
 
-            if m > 0 and nums[m - 1] > nums[m]:
-                right = m - 1
-            elif m < len(nums) - 1 and nums[m] < nums[m + 1]:
-                left = m + 1
+            if middle < n - 1 and nums[middle] < nums[middle + 1]:
+                left = middle + 1
+            elif middle > 0 and nums[middle] < nums[middle - 1]:
+                right = middle - 1
             else:
-                return m
+                return middle
 
-        raise ValueError("no peak found")
+        raise ValueError("answer not found")
