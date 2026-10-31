@@ -1,13 +1,13 @@
 class Solution:
     def findMaxConsecutiveOnes(self, nums: list[int]) -> int:
-        current_streak = 0
-        longest_streak = 0
+        count = 0
+        max_count = 0
 
-        for num in nums:
-            if num:
-                current_streak += 1
+        for x in nums:
+            if x == 1:
+                count += 1
             else:
-                longest_streak = max(longest_streak, current_streak)
-                current_streak = 0
+                max_count = max(count, max_count)
+                count = 0
 
-        return max(longest_streak, current_streak)
+        return max(count, max_count)
