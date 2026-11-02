@@ -1,21 +1,14 @@
 class Solution:
     def jump(self, nums: list[int]) -> int:
-        if len(nums) == 1:
-            return 0
+        n = len(nums)
+        answer = 0
+        end, far = 0, 0
 
-        i = 1
-        count = 1
+        for i in range(n - 1):
+            far = max(far, i + nums[i])
 
-        jump = nums[0]
+            if i == end:
+                answer += 1
+                end = far
 
-        while jump < len(nums) - 1:
-            next_jump = 0
-
-            while i <= jump and i < len(nums):
-                next_jump = max(next_jump, nums[i] + i)
-                i += 1
-
-            jump = next_jump
-            count += 1
-
-        return count
+        return answer
