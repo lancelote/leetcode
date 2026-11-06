@@ -14,7 +14,6 @@ class Solution:
         h = [(0, 0, 0)]  # cost, city, discounts used
         dp = [[sys.maxsize] * (discounts + 1) for _ in range(n)]
         dp[0][0] = 0
-        visited = [[False] * (discounts + 1) for _ in range(n)]
 
         while h:
             cost, city, discounts_used = heapq.heappop(h)
@@ -22,9 +21,8 @@ class Solution:
             if city == n - 1:
                 return cost
 
-            if visited[city][discounts_used]:
+            if cost > dp[city][discounts_used]:
                 continue
-            visited[city][discounts_used] = True
 
             for neighbor, toll in graph[city]:
                 # don't use the discount
