@@ -13,8 +13,7 @@ SHIFTS = (
 
 
 def get_edges(
-    node: tuple[int, int],
-    maze: list[list[int]]
+    node: tuple[int, int], maze: list[list[int]]
 ) -> Iterator[tuple[int, Node]]:
     rows = len(maze)
     cols = len(maze[0])
@@ -23,7 +22,11 @@ def get_edges(
         distance = 0
         r, c = node
 
-        while 0 <= (nr := r + dr) < rows and 0 <= (nc := c + dc) < cols and maze[nr][nc] == 0:
+        while (
+            0 <= (nr := r + dr) < rows
+            and 0 <= (nc := c + dc) < cols
+            and maze[nr][nc] == 0
+        ):
             r = nr
             c = nc
             distance += 1
@@ -34,10 +37,7 @@ def get_edges(
 
 class Solution:
     def shortestDistance(
-        self,
-        maze: list[list[int]],
-        start: list[int],
-        destination: list[int]
+        self, maze: list[list[int]], start: list[int], destination: list[int]
     ) -> int:
         graph: dict[Node, list[tuple[int, Node]]] = defaultdict(list)
         for r, row in enumerate(maze):
