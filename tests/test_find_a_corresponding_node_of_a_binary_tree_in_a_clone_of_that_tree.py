@@ -1,6 +1,6 @@
 import pytest
 
-from src.find_a_corresponding_node_of_a_binary_tree_in_a_clone_of_that_tree import (  # noqa
+from src.find_a_corresponding_node_of_a_binary_tree_in_a_clone_of_that_tree import (
     Solution,
 )
 from src.utils.binary_tree import find_node

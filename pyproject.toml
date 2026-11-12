@@ -100,6 +100,7 @@ ignore = [
     "PLR0911",  # I know better how many returns I need
     "PLR0917",  # I know better
     "CPY001",   # I don't care about copyrights
+    "E501",  # and what can I do given it's a third party API?
 ]
 
 [tool.ruff.lint.isort]

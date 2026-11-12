@@ -1,6 +1,6 @@
 import pytest
 
-from src.build_array_where_you_can_find_the_maximum_exactly_k_comparisons import (  # noqa
+from src.build_array_where_you_can_find_the_maximum_exactly_k_comparisons import (
     Solution,
 )
 
