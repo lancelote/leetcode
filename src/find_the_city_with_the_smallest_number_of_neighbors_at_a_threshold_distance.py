@@ -8,7 +8,9 @@ class Solution:
         city: int,
         graph: list[list[tuple[int, int]]],
         shortest_path: list[int],
+        distance_threshold: int,
     ):
+        shortest_path[city] = 0
         heap = [
             (0, city),
         ]
@@ -19,10 +21,15 @@ class Solution:
             if current_distance > shortest_path[current_city]:
                 continue
 
-            shortest_path[current_city] = current_distance
-
             for neighbor, distance in graph[current_city]:
-                heapq.heappush(heap, (distance + current_distance, neighbor))
+                new_distance = distance + current_distance
+
+                if new_distance > distance_threshold:
+                    continue
+
+                if new_distance < shortest_path[neighbor]:
+                    shortest_path[neighbor] = new_distance
+                    heapq.heappush(heap, (new_distance, neighbor))
 
     def get_fewest_neighbors_city(
         self,
@@ -60,10 +67,7 @@ class Solution:
         shortest_path = [[sys.maxsize] * n for _ in range(n)]
 
         for i in range(n):
-            shortest_path[i][i] = 0
-
-        for i in range(n):
-            self.dijkstra(i, graph, shortest_path[i])
+            self.dijkstra(i, graph, shortest_path[i], distance_threshold)
 
         return self.get_fewest_neighbors_city(
             n, shortest_path, distance_threshold
