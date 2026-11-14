@@ -1,74 +1,55 @@
-import heapq
 import sys
 
 
 class Solution:
-    def dijkstra(
-        self,
-        city: int,
-        graph: list[list[tuple[int, int]]],
-        shortest_path: list[int],
-        distance_threshold: int,
-    ):
-        shortest_path[city] = 0
-        heap = [
-            (0, city),
-        ]
+    def findTheCity(
+        self, n: int, edges: list[list[int]], distance_threshold: int
+    ) -> int:
+        distance_matrix = [[sys.maxsize] * n for _ in range(n)]
 
-        while heap:
-            current_distance, current_city = heapq.heappop(heap)
+        for i in range(n):
+            distance_matrix[i][i] = 0
 
-            if current_distance > shortest_path[current_city]:
-                continue
+        for u, v, w in edges:
+            distance_matrix[u][v] = w
+            distance_matrix[v][u] = w
 
-            for neighbor, distance in graph[current_city]:
-                new_distance = distance + current_distance
+        self.floyd(n, distance_matrix)
 
-                if new_distance > distance_threshold:
-                    continue
+        return self.get_fewest_neighbors_city(
+            n, distance_matrix, distance_threshold
+        )
 
-                if new_distance < shortest_path[neighbor]:
-                    shortest_path[neighbor] = new_distance
-                    heapq.heappush(heap, (new_distance, neighbor))
+    def floyd(self, n: int, distance_matrix: list[list[int]]) -> None:
+        for k in range(n):
+            for i in range(n):
+                for j in range(n):
+                    distance_matrix[i][j] = min(
+                        distance_matrix[i][j],
+                        distance_matrix[i][k] + distance_matrix[k][j],
+                    )
 
     def get_fewest_neighbors_city(
         self,
         n: int,
-        shortest_path: list[list[int]],
+        distance_matrix: list[list[int]],
         distance_threshold: int,
     ):
-        best_city = -1
-        fewest_neighbors_count = n
+        fewest_neighbors_city = 0
+        fewest_neighbors_count = sys.maxsize
 
         for i in range(n):
             neighbors_count = 0
 
             for j in range(n):
-                if i != j and shortest_path[i][j] <= distance_threshold:
+                if i == j:
+                    continue
+
+                if distance_matrix[i][j] <= distance_threshold:
                     neighbors_count += 1
 
             if neighbors_count <= fewest_neighbors_count:
                 fewest_neighbors_count = neighbors_count
-                best_city = i
+                fewest_neighbors_city = i
 
-        return best_city
-
-    def findTheCity(
-        self,
-        n: int,
-        edges: list[list[int]],
-        distance_threshold: int,
-    ) -> int:
-        graph: list[list[tuple[int, int]]] = [[] for _ in range(n)]
-        for u, v, w in edges:
-            graph[u].append((v, w))
-            graph[v].append((u, w))
-
-        shortest_path = [[sys.maxsize] * n for _ in range(n)]
-
-        for i in range(n):
-            self.dijkstra(i, graph, shortest_path[i], distance_threshold)
-
-        return self.get_fewest_neighbors_city(
-            n, shortest_path, distance_threshold
-        )
+        return fewest_neighbors_city
