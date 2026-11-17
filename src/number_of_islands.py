@@ -1,37 +1,42 @@
 SHIFTS = (
-    (-1, 0),
-    (0, +1),
-    (+1, 0),
-    (0, -1),
+    (0, -1),  # left
+    (-1, 0),  # up
+    (0, +1),  # right
+    (+1, 0),  # down
 )
 
 
 class Solution:
-    def numIslands(self, grid: list[list[str]]) -> int:
-        rows = len(grid)
-        cols = len(grid[0])
+    def mark_as_visited(
+        self, start: tuple[int, int], grid: list[list[str]]
+    ) -> None:
+        n_rows = len(grid)
+        n_cols = len(grid[0])
 
-        count = 0
-        visited: set[tuple[int, int]] = set()
+        to_visit = [start]
 
-        def dfs(r: int, c: int) -> None:
-            if (r, c) in visited:
-                return
+        while to_visit:
+            r, c = to_visit.pop()
+            grid[r][c] = "0"
 
-            if r < 0 or r >= rows or c < 0 or c >= cols:
-                return
-
-            if grid[r][c] == "0":
-                return
-
-            visited.add((r, c))
             for dr, dc in SHIFTS:
-                dfs(r + dr, c + dc)
+                nr = r + dr
+                nc = c + dc
 
-        for r in range(rows):
-            for c in range(cols):
-                if (r, c) not in visited and grid[r][c] == "1":
-                    count += 1
-                    dfs(r, c)
+                if (
+                    0 <= nr < n_rows
+                    and 0 <= nc < n_cols
+                    and grid[nr][nc] == "1"
+                ):
+                    to_visit.append((nr, nc))
 
-        return count
+    def numIslands(self, grid: list[list[str]]) -> int:
+        num_of_islands = 0
+
+        for r, row in enumerate(grid):
+            for c, item in enumerate(row):
+                if item == "1":
+                    num_of_islands += 1
+                    self.mark_as_visited((r, c), grid)
+
+        return num_of_islands
